@@ -1,0 +1,41 @@
+<%- title "Forgot Your Password?", "h1" -%>
+
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "login" %>
+<%- end -%>
+
+	<% form_for @password do |f| %>
+		<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems finding your account:" %>
+
+	<div class="box column firstColumn">	
+		<fieldset>
+			<legend class="noscreen">Forgot your password?</legend>
+			<div class="loginSelection">
+				<h1>Forgot your password?</h1>
+			</div>
+			
+			<dl class="leftLabels fields">
+				<dt>
+					<%= f.label :email, 'Email address' %>
+				</dt>
+				<dd>
+					<!-- <div class="medium textfield"> -->
+					
+						<%= f.text_field :email, :class => 'medium textfield' %>
+					<!-- </div> -->
+					<em class="tip">The email address you signed up with.</em>
+				</dd>
+			</dl>
+		</fieldset>
+		
+		<div class="buttonBar">
+			<button class="rounded" type="submit">
+				<b><b>
+					Send me my password&hellip;
+				</b></b>
+			</button>
+			<span class="or">or</span>
+			<%= link_to 'Back to Log In', login_path, :class => "secondary" %>
+		</div>
+	</div>
+	<% end -%>

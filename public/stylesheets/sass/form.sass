@@ -1,0 +1,196 @@
+@import colours.sass
+@import mixins.sass
+
+input, textarea, select
+  border: 1px solid #b4b4b4
+  border-color: #707070 #ababab #cecece
+  outline: 1px solid #fff
+  margin: 1px
+  background-color: #fff
+  color: #222
+  padding: 4px 3px
+  font-size: 1em
+  font-family: inherit
+  width: auto
+  float: left
+  +boxsizing
+
+select
+  //margin: 0
+  font-size: 1em
+  width: auto
+  padding: 2px
+  //height: 2em
+  //+boxsizing
+
+  option
+    vertical-align: middle
+    padding: 1px 3px
+
+
+.checkbox label, .radiobutton label
+  //font-weight: normal
+  float: left
+  clear: left
+
+.checkbox input, .radiobutton input
+  margin: 1px 0.5em 0 0
+  float: left
+  outline: 0
+  background-color: transparent
+  border: 0
+
+label em
+  font-weight: normal
+  font-style: normal
+  color = !blue_title 
+
+
+dl.fields
+  dd em.tip
+    display: block
+    clear: both
+    margin-left: 2px
+    font-style: normal
+    font-weight: normal
+
+  dt em.tip
+    margin-left: 2px
+    font-style: normal
+    font-weight: normal
+    text-shadow: none
+
+  dd em.inline
+    float: left
+    clear: none
+    margin-top: 0.5em
+
+
+.fieldText
+  line-height: 2.2em
+  margin: 0 6px 0 3px
+  float: left
+  cursor: default
+
+
+.fields
+  dd
+    textarea, .textfield, select
+      //display: block
+      margin-right: 3px
+      //border: 1px solid #fff
+      //float: left
+      //overflow: hidden
+      //height: 1%
+
+    .textfield input, .textarea textarea
+      border: 1px solid #b4b4b4
+      border-color: #707070 #ababab #cecece
+      background-color: #fff
+      color: #222
+      padding: 4px 3px
+      margin: 0
+      font-size: 1em
+      font-family: inherit
+      width: auto
+      float: left
+      +boxsizing
+
+    select
+      //margin: 0
+      //font-size: 1em
+      width: auto
+      padding: 2px
+      height: 2em
+      +boxsizing
+
+    .textfield input, textarea
+      &:focus, &:active
+        //width: 100%
+        border-color: #0074cc
+        color: #000
+
+
+    div .textarea textarea
+      font: inherit
+      font-size: 1.1em
+      padding: 3px
+
+    .fieldWithErrors
+      input, select, textarea
+        border-color: red
+        margin: 0
+
+  .numeric input
+    text-align: center
+
+  dd
+    .tiny, .small, .medium, .large, .full
+      float: left
+
+    .tiny
+      width: 10%
+
+    .small
+      width: 25%
+
+    .medium
+      width: 50%
+
+    .large
+      width: 75%
+
+    .full
+      width: 98%
+
+    .tiny input, .small input, .medium input, .large input, .full input, .tiny textarea, .small textarea, .medium textarea, .large textarea, .full textarea, .tiny select, .small select, .medium select, .large select, .full select
+      width: 100%
+
+    div.dateselect select
+      width: auto
+
+
+#uploader
+  margin: 10px
+
+//.uploadifyError
+//  border: 2px solid #FBCBBC !important
+//  background-color: #FDE5DD !important
+
+.uploadifyQueueItem .cancel
+  float: right
+
+.uploadifyProgress 
+  background-color: #FFFFFF
+  border-top: 1px solid #808080
+  border-left: 1px solid #808080
+  border-right: 1px solid #C5C5C5
+  border-bottom: 1px solid #C5C5C5
+  margin-top: 10px
+  width: 100%
+
+.uploadifyProgressBar 
+  //background-color: #0099FF
+  background: orange url(/images/bg-progress-bar.gif) repeat-x top right
+  width: 1px
+  height: 20px
+
+.uploadifyQueueItem 
+  border: none
+  border-bottom: 1px solid #E5E5E5
+  //background-color: #FFFFFF
+  padding: 10px
+  width: 400px
+
+.uploadifyError 
+  background-color: #FDE5DD !important
+
+.uploadifyQueueItem .cancel 
+  float: right
+
+// Hide uploadify_submit if no JS
+#uploadify_submit
+  display: none
+ 
+.js #uploadify_submit
+  display: block

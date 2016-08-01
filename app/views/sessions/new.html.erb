@@ -1,0 +1,117 @@
+<%- title "Login to your account" -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag 'login', 'form' %>
+<%- end -%>
+<%- content_for :foot do -%>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.loginSelection a.useOpenId, div.loginSelection a.useLogin").click(function() {
+		$("#openIdForm, #loginForm").toggle()
+	});
+	$("#login").focus();		
+})
+</script>
+<%- end -%>
+
+<div class="twoColumns">
+	<% form_tag session_path do %>
+	<%= flash_messages %>
+	
+	<div class="column firstColumn">
+		<div id="loginForm" class="login box">	
+			<fieldset>
+				<legend class="noscreen">Login</legend>
+						
+				<div class="loginSelection">
+					<h1>Login</h1>
+					<a href="#openIdForm" class="useOpenId">Use OpenID</a>
+				</div>
+			
+				<dl class="fields">
+					<dt>
+						<%= label_tag 'login', 'Email Address' %>
+					</dt>
+					<dd>	
+						<!-- <div class="full textfield"> -->
+							<%= text_field_tag 'login', @login, :class => 'full textfield' %>
+						<!-- </div> -->
+					</dd>
+					<dt>
+						<%= label_tag 'password' %>
+					</dt>
+					<dd>
+						<!-- <div class="medium password textfield"> -->
+							<%= password_field_tag 'password', nil, :class => 'medium password textfield' %>
+						<!-- </div> -->
+						<label id="rememberMe" for="remember_me" class="checkbox field">
+							<%= check_box_tag 'remember_me', '1', @remember_me %>
+							Keep me logged in
+						</label>
+					</dd>
+				</dl>
+			</fieldset>
+		
+			<div class="buttonBar">
+				<button class="rounded" type="submit">
+					<b><b>
+						Login
+					</b></b>
+				</button>
+				<span class="or">or</span>
+				<%= link_to 'Forgotten your password?', forgot_password_path, :class => "secondary" %>
+			</div>
+		</div>
+	
+		<div id="openIdForm" class="jsHide login box">	
+			<fieldset>
+				<legend class="noscreen">OpenID login form</legend>
+				<div class="loginSelection">
+					<h1>Login using OpenID</h1>
+					<a href="#loginForm" class="useLogin">Use email &amp; password</a>
+				</div>
+			
+				<dl class="fields">
+					<dt>
+						<%= label_tag 'openid_url', 'OpenID URL' %>
+					</dt>
+					<dd>
+						<!-- <div class="full textfield"> -->
+							<%= text_field_tag 'openid_url', params[:openid_url] || params['openid.identity'], { :class => "openId full textfield" } %>
+						<!-- </div> -->
+						<em class="tip">
+							Your URL assigned to you by OpenID provider
+						</em>
+					</dd>
+				</dl>
+			</fieldset>
+	
+			<div class="buttonBar">
+				<button class="rounded" type="submit">
+					<b><b>
+						Log In
+					</b></b>
+				</button>
+			</div>
+		</div>
+	</div>
+	<% end -%>
+
+	<div class="clear box column" id="login">
+		<h2>
+			Don't have an account? Sign up for FREE!
+		</h2>
+
+		<ul>
+			<li><strong>It's quick &amp; easy</strong> to access your flight log from <strong>any web-browser, anywhere</strong> (including support for <strong>mobile devices like the iPhone</strong>).</li>
+			<li>Analyze a range of <strong>comprehensive statistics and graphs</strong>.</li>
+			<li><strong>Track your flying equipment</strong>: airtime usage, age, serial numbers (useful if something's stolen).</li>
+			<li><strong>Export</strong> your flight log at any time &ndash; we won't lock you in.</li>
+		</ul>
+	
+		<p style="float:left" class="whiteButton">
+			<a href="/signup/" class="rounded">
+				<span>Sign up now for FREE&hellip;</span>
+			</a>
+		</p>
+	</div>
+</div>

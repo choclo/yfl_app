@@ -1,0 +1,31 @@
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "ratings" %>
+<%- end -%>
+<%- current_navigation_tab :settings, :licenses -%>
+<%- title("Edit #{@license.name} license") -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Aircraft Licenses", pilots_pilot_licenses_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			Edit license
+		</h1>
+	</div>
+	
+	<%- form_for @license, :url => { :action => :update } do |f| -%>
+	
+	<%= render :partial => "license_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit">
+			<b><b>
+				Save License
+			</b></b>
+		</button>
+		<%= link_to "<span>Delete License</span>", pilots_license_path(@license), :confirm => "Are you sure you want to delete this license?", :method => :delete, :class => "rounded" %>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', :back, :title => "Don't save this license", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

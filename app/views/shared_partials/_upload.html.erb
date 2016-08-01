@@ -1,0 +1,101 @@
+<%
+button_text = button_text || 'Upload'
+browse_button_text = browse_button_text || 'Upload Files'
+dialog_file_description = dialog_file_description || 'Photos'
+allowed_extensions = [:jpg, :jpeg, :gif, :png]
+max_size = 5.megabyte
+allow_multiple_files = true
+url = assets_path
+upload_field = 'upload_local_data'
+
+attachable_id = @equipment.id
+attachable_type = @equipment.class
+
+%>
+<%- session_key_name = ActionController::Base.session_options[:key] -%>
+<% content_for :foot do -%>
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
+<%= javascript_include_tag "uploadify/swfobject" %>
+<%= javascript_include_tag "uploadify/jquery.uploadify.v2.1.0.min" %>
+<script type="text/javascript">
+<% if protect_against_forgery? -%>
+var AUTH_TOKEN = '<%= form_authenticity_token %>';
+<% end -%>
+
+$(document).ready(function() {
+
+	$('#<%= upload_field %>').uploadify({
+		uploader : '/javascripts/uploadify/uploadify.swf',
+		script : '<%= url %>',
+		fileDataName : $('#uploader input:file')[0].name, // Extract correct name of upload field from form field
+		cancelImg : '/images/uploadify/cancel.png',
+		buttonText: '<%= browse_button_text %>',
+		//buttonImg: '/images/btn-upload.png',
+		width: 110,
+		height: 30,
+		//buttonImg : '/images/browse-background.png',
+		fileDesc : '<%= dialog_file_description %> (<%= allowed_extensions.collect { |ext| "*.#{ext}" }.join(';') %>)',
+		fileExt : '<%= allowed_extensions.collect { |ext| "*.#{ext}" }.join(';') %>',
+		sizeLimit : <%= max_size %>,
+		multi : <%= allow_multiple_files %>,
+		auto: true,
+		// Degrade gracefully normal form
+    swfupload_pre_load_handler: function() {
+      //$('#uploadify_submit').hide();
+    },
+		onComplete : function(event, queueID, fileObj, response, data) { 
+			var data = eval('(' + response + ')'); 
+			console.log(data); 
+			$('div.carousel ul').append('<li>' +
+					'<a rel="facebox" href="' + data.asset + '"><img src="' + data.asset + '" class="photo" alt="Preview"><span class="zoom">Zoom</span></a>' +
+				'</li>');
+			initializeCarousel();
+			//$.getScript(data.photo)
+		},
+		onAllComplete : function(event, data){
+			$('#uploadify_cancel').hide('blind');
+			//$('#uploadify_submit').show('blind');
+		},
+		onSelect: function(event, queueID, fileObj){
+			if (fileObj.size > <%= max_size %>) {
+				alert('The image' + fileObj.name + ' is too large.')
+				return false;
+			}
+		},
+		scriptData : {
+			'<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
+			'authenticity_token' : encodeURIComponent('<%= u form_authenticity_token if protect_against_forgery? %>'),
+			'attachable_type': '<%= attachable_type %>',
+			'attachable_id': '<%= attachable_id %>'
+		}
+	});
+	
+	// $('#uploadify_submit').click(function(event){
+	// 	event.preventDefault();
+	// 	$('#<%= upload_field %>').uploadifyUpload();
+	// 	//$('#uploadify_submit').hide();
+	// 	$('#uploadify_cancel').show();
+	// });
+
+	$('#uploadify_cancel').click(function(event){
+		event.preventDefault();
+		$('#<%= upload_field %>').uploadifyClearQueue();
+		$('#uploadify_cancel').hide();
+		//$('#uploadify_submit').show();
+	});
+	
+});
+
+</script>
+<% end -%>
+<% form_for(:upload, :html => { :multipart => true}) do |f| %>
+	<% if protect_against_forgery? -%>
+	<%= f.hidden_field :authenticity_token, :value => (u form_authenticity_token) -%>
+	<% end -%>
+	<%= f.error_messages %>
+	<div id="uploader">
+		<%= f.file_field :data, :id => upload_field %>
+	</div>
+	<!-- <a href="#" class="rounded" id="uploadify_submit"><span><%= button_text %></span></a> -->
+	<a href="#" id="uploadify_cancel" class="secondary" style="display:none">Cancel Upload</a>
+<% end %>

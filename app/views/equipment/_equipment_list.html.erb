@@ -1,0 +1,68 @@
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "equipment" %>
+<%- end -%>
+<%- content_for :foot do -%>
+<%= javascript_include_tag "equipment", "linkTableRows" %>
+<%- end -%>
+
+<% 
+# :browse_and_edit :browse_and_show or :checkbox_selection
+mode = mode || :browse_and_edit
+%>
+<div id="equipmentList">
+	<ul class="categories">
+		<%- 
+		
+		for d in equipment_categories_collection do 
+			primary_category = d[1]
+			next if primary_category[:categories].empty? # skip over empty categories (the user can't fly this class of aircraft)
+			primary_cat_label = primary_category[:label]
+			primary_cat_slug = primary_cat_label.downcase.gsub(/\s/,'_') + "_"
+		-%>
+		<li>
+			<h3><%=h primary_cat_label %></h3>
+			
+			<ul id="<%= primary_cat_slug %>">
+				<%- 
+				for equip_cat in primary_category[:categories] do 
+					secondary_cat_label = equip_cat[0]
+					secondary_cat_slug = secondary_cat_label.downcase.gsub(/\s/,'_')
+					secondary_cat_count = current_pilot.equipment.count(:id, :conditions => "equipment_category_id = #{equip_cat[1]}")
+				-%>
+				<li>
+					<a href="#<%= primary_cat_slug + secondary_cat_slug %>">
+						<%=h secondary_cat_label %> 
+					<%- if secondary_cat_count > 0 -%>
+						<span class="numberBubble" title="There <%= "#{secondary_cat_count == 1 ? 'is 1 item' : "are #{secondary_cat_count} items"}" %> in this category"><%= secondary_cat_count %></span>
+					<%- end -%>
+					</a>
+				</li>
+				<%- end -%>
+			</ul>
+			
+		</li>
+		<%- end -%>
+	</ul>
+
+	<%- for d in equipment_categories_collection do 
+		primary_category = d[1]
+		primary_cat_label = primary_category[:label]
+		primary_cat_slug = primary_cat_label.downcase.gsub(/\s/,'_') + "_"
+		for equip_cat in primary_category[:categories] do 
+			category_label = equip_cat[0]
+			category_equipment = current_pilot.equipment.find_all_by_equipment_category_id(equip_cat[1])
+			secondary_cat_slug = category_label.downcase.gsub(/\s/,'_')
+	-%>
+		<div id="<%= primary_cat_slug + secondary_cat_slug %>" class="categoryItems">
+			
+			<div class="header whiteButton">
+				<%= link_to "<span>Add #{category_label}</span>", new_pilots_equipment_path(:equipment_category_id => equip_cat[1]), :class => "rounded", :title => "Add a new piece of equipment to the #{category_label} category" if mode == :browse_and_edit %>
+				<h2><%=h primary_cat_label %> <span class="delimeter"><img alt="" src="/images/crumb-delimiter.png"></span> <%=h category_label %></h2>
+			</div>
+			
+			<%= render :partial => "/equipment/equipment_category_list", :locals => { :category_equipment => category_equipment, :mode => mode } %>
+		</div>
+		<%- end -%>
+	<%- end -%>
+	
+</div>

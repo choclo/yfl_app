@@ -1,0 +1,54 @@
+<%- 
+
+# Default options
+options = {
+  :size => :medium, 
+  :class => "photo"
+}.merge(options || {})
+
+content_for :head do 
+  concat(stylesheet_link_tag 'carousel')
+end
+content_for :foot do 
+  concat(javascript_include_tag 'jcarousellite_1.0.1.min.js')
+-%>
+<script type="text/javascript">
+function initializeCarousel() {
+  $('.carousel').jCarouselLite({
+    btnNext: ".next",
+    btnPrev: ".prev",
+    visible: 2,
+    scroll: 1,
+    speed: 500,
+    circular: false
+  });
+  if($('.carousel li').length > 2) {
+    $('.carouselWrapper .next').removeClass('disabled');
+  }   
+}
+
+jQuery(document).ready(function($) {
+  $('a[rel*=facebox]').facebox();
+  try {
+    initializeCarousel();
+  } catch (e) {
+    console.log(e);
+  }
+})
+</script>
+<%- end -%>
+
+<div class="clearfix carouselWrapper">
+  <span class="disabled prev">Previous image</span>
+  <span class="disabled next">Next image</span>
+  
+  <div class="carousel">
+    <ul>
+      <%- photo_assets.each do |asset| -%>
+      <li>
+        <%= link_to photo_asset_image_tag(asset, options) + '<span class="zoom">Zoom</span>', asset.url(:large), :rel => "facebox" %>
+      </li>
+      <%- end -%>
+    </ul>
+  </div>
+</div>

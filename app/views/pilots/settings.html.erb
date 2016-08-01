@@ -1,0 +1,41 @@
+<%- current_navigation_tab :settings, :index -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "pilot" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<%- title("Settings", "h1") -%>
+		<h1>What settings would you like to change?</h1>
+	</div>
+	
+	<div class="settings threeColumns container">
+		<div class="column">
+			<a href="<%= url_for(edit_pilots_path) %>">
+				<h2>
+					<span class="profileIcon sprite"></span>
+					Your Pilot Profile
+				</h2>
+				<p>Your name, details about your National Association membership and previous flight history.</p>
+			</a>
+		</div>
+		<div class="column">
+			<a href="<%= url_for(pilots_pilot_licenses_path) %>">
+				<h2>
+					<span class="licensesIcon sprite"></span>
+					Aircraft Licenses
+				</h2>
+				<p>What types of aircraft are you certified to fly, and what licenses have you been awarded?</p>
+			</a>
+		</div>
+		<div class="column">
+			<a href="<%= url_for(edit_pilots_preferences_path) %>">
+				<h2>
+					<span class="displayIcon sprite"></span>
+					Display Preferences
+				</h2>
+				<p>Customise the display of measurement and date/times.</p>
+			</a>
+		</div>
+	</div>
+	
+</div>

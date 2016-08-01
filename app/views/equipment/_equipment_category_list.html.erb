@@ -1,0 +1,74 @@
+<% 
+
+# :browse_and_show, :browse_and_edit, :checkbox_selection
+mode = mode || :browse_and_edit
+
+%>
+<%- if category_equipment.size == 0 -%>
+	<p>You have not yet added any equipment for this category.</p>
+<%- else -%>
+	<input type="hidden" name="log_entry[equipment_ids][]" value="" />
+	<table cellspacing="0" width="100%" class="pretty">
+		<thead>
+			<tr>
+			<% if mode == :checkbox_selection %>
+				<th width="80">
+					Select
+				</th>
+			<% end %>
+				<th width="100">
+					Image
+				</th>
+				<th>
+					Details
+				</th>
+				<th width="20%">
+					Air&ndash;time
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+	<%- category_equipment.each do |item| -%>
+			<tr class="<%= cycle("even", "odd", :name => "row_class") -%>">
+				<% if mode == :checkbox_selection %>
+				<td>
+					<label class="checkbox" for="equipment_<%= item.id %>">
+						<%= check_box_tag 'log_entry[equipment_ids][]', item.id, @log_entry.equipment.include?(item), { :id => "equipment_#{item.id}" } %>
+						I used this
+					</label>
+				</td>
+				<% end %>
+				<td class="photo">
+					<%= photo_asset_image_tag item.photo_assets, :size => :thumb %>
+				</td>
+				<td>
+					<h3>
+						<%= 
+						if mode == :browse_and_edit
+							link_to h(item.name), edit_pilots_equipment_path(item)
+						elsif mode == :browse_and_show
+							link_to h(item.name), pilots_equipment_path(item)
+						elsif mode == :checkbox_selection
+							h(item.name)
+						end
+						%>
+					</h3>
+					<p>
+						<%
+						item_details = item.attributes.sort.select {|k,v| ["colour","serial_number"].include?(k) && !v.nil? && !v.strip.empty? }
+						details = []
+						item_details.each do |k,v|
+							details << "#{k.humanize}: <strong>#{v}</strong>"
+						end
+						concat details.join(", ")
+						-%>
+					</p>
+				</td>
+				<td class="airtime">
+					<%= format_minutes_as_hours_or_minutes item.total_air_time_as_minutes, true %>
+				</td>
+			</tr>
+	<%- end -%>
+		</tbody>
+	</table>
+<%- end -%>

@@ -1,0 +1,110 @@
+@import colours.sass
+
+/*
+#equipment
+  dl
+    dt
+      text-align: left
+      font-weight: bold
+
+      &.equipmentCategoryName
+        color = !blue_title
+        border-bottom = "2px solid #{!blue_title}" 
+        font-size: 1.3em
+        padding: 1em 0 0 0
+        clear: both
+        width: 100%
+
+      &.first
+        padding: 0
+
+    dl dt
+      width: 110px
+      color: #333
+
+    dd
+      margin-left: 0
+
+    &.fields
+      padding-left: 10px
+*/
+/*
+  a.add
+    background: url(/images/icons/small/add.png) no-repeat 5px 50%
+    line-height: 2em
+    padding: 0 5px 0 25px
+    float: left
+*/
+
+#equipment
+  .blank, .metaLink
+    float: left
+
+#windStrength, #windDirection
+  float: left
+  clear: none
+	
+#windDirection
+
+  ul
+    position: relative
+    display: block
+    width: 250px
+    height: 200px
+    background: url(/images/compassrose.png) no-repeat 27px 22px
+
+  li
+    position: absolute
+
+    label
+      white-space: nowrap
+      color = !blue_title
+
+    &.cardinalW
+      left: 15px
+
+    &.cardinalE
+      left: 185px
+
+    &.cardinalN, &.cardinalS
+      left: 100px
+
+    &.cardinalNE, &.cardinalSE
+      left: 40px
+
+    &.cardinalNW, &.cardinalSW
+      left: 160px
+
+    &.cardinalN
+      top: 10px
+
+    &.cardinalS
+      bottom: 0
+
+    &.cardinalNE, &.cardinalNW
+      top: 35px
+
+    &.cardinalE, &.cardinalW
+      top: 95px
+
+    &.cardinalSE, &.cardinalSW
+      top: 155px
+
+#windStrength
+  dl
+    width: 300px
+
+    dt
+      width: 150px
+    dd
+      width: 140px
+      margin-left: 160px
+      
+dl.leftLabels dd#equipment 
+  overflow: visible
+
+  fieldset
+    margin: 2em 0 1em -11em
+
+  #equipmentList .categoryItems
+    width: 666px

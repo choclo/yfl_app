@@ -1,0 +1,23 @@
+<%- 
+msg_id = 'no-equipment-message'
+
+return if !system_message_is_visible(msg_id)
+-%>
+
+<%# content_for :head do %>
+<%# stylesheet_link_tag msg_id %>
+<%# end %>
+
+<div id="<%= msg_id %>" class="systemMessage">
+	<img src="/images/flash/notice.png" alt="Getting started" class="icon" />
+	<a href="#" class="close">Hide message</a>
+	<h3>About equipment tracking</h3>
+	<p>
+		Here you can provide details about all your flying gear; from gliders, to radios, to helmets.
+		<br />
+		For insurance purposes try including details like serial numbers and photos.
+	</p>
+	<p>
+		When adding flight log entries you will be able to mark which gear was used on the flight, automatically calculating it's airtime usage.
+	</p>
+</div>

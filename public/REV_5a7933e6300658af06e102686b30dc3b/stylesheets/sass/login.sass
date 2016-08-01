@@ -1,0 +1,82 @@
+@import colours.sass
+
+body
+  padding-top: 60px
+  background-position: 50% 125px
+
+
+#header
+  margin: 0 0 15px
+
+
+.loginSelection
+  overflow: hidden
+
+  h1
+    float: left
+    font-size: 2em
+    line-height: 2em
+
+  a
+    float: right
+    padding: 5px 0
+    margin-top: 0.8em
+
+    &.useOpenId
+      padding-left: 20px
+      background: url(/images/icons/openid-small.gif) no-repeat 0 50%
+      white-space: nowrap
+      margin-right: 0
+
+
+.login .loginSelection h1
+  background: url(/images/icons/padlock.png) no-repeat 0 45%
+  padding-left: 30px
+
+
+#rememberMe
+  float: left
+  margin: 8px 0 0 8px
+
+
+.fields dd .textfield input.openId
+  background: #fff url(/images/icons/openid-small.gif) no-repeat 5px 50%
+  padding-left: 25px
+
+
+#signup
+  color: #666
+
+  h2
+    font-size: 1.6em
+
+// AB: Moved to common
+//  a.secondary
+//    font-size: 1.2em
+//    font-weight: bold
+
+
+#footer
+  border: 0
+
+
+.unauthorised #footer
+  text-align: left
+
+
+.js #openIdForm
+  display: none
+  
+
+.fields dd
+  input.textfield, textarea.textarea, select.select
+    font-size: 20px
+
+
+#passwordReqs
+  clear: none
+  float: left
+  margin-top: 10px
+
+dd.termsAndConditions
+  margin-top: 10px

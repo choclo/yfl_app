@@ -1,0 +1,132 @@
+<% @user.password = @user.password_confirmation = nil %>
+<%- title "Sign up for a free YourFlightLog account" -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "login" %>
+<%- end -%>
+<%- content_for :foot do -%>
+	<%= javascript_include_tag "jquery" %>
+	<script type="text/javascript">
+	/* Login form selection toggle */
+	$(document).ready(function() {
+		$("div.loginSelection a.useOpenId, div.loginSelection a.useDetails").click(function() {
+			$("#openIdForm, #detailsForm").toggle()
+		});
+		$("#user_email").focus();
+	});
+	</script>
+<%- end -%>
+
+<div class="twoColumns">
+
+	<% form_for @user do |f| %>
+	<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems creating your account:" %>
+	
+	<div class="column firstColumn">
+		<div id="detailsForm" class="signup box">
+			<fieldset>
+				<div class="loginSelection">
+					<h1>Sign up</h1>
+					<a href="#openIdForm" class="useOpenId">Use OpenID</a>
+				</div>
+				<dl class=" fields">
+					<dt>
+						<%= f.label :login, "Email Address" %> <em class="tip">We'll keep it just between us.</em>
+					</dt>
+					<dd>
+						<!-- <div class="full textfield"> -->
+							<%= f.text_field :login, :class => 'full textfield' %>
+						<!-- </div> -->
+					</dd>
+					<dt>
+						<%= f.label :password %>
+					</dt>
+					<dd>
+						<!-- <div class="medium password textfield"> -->
+							<%= f.password_field :password, :class => 'medium password textfield' %>
+						<!-- </div> -->
+						<em class="tip" id="passwordReqs">Must be at least 6 characters long.</em>
+					</dd>
+					<dt>
+						<%= f.label :password_confirmation, 'Confirm Password' %>
+					</dt>
+					<dd>
+						<!-- <div class="medium password textfield"> -->
+							<%= f.password_field :password_confirmation, :class => 'medium password textfield' %>
+						<!-- </div> -->
+					</dd>
+				</dl>
+				<dl class="noscreen">
+				  Terms and conditions
+				</dl>
+			  <dd class="termsAndConditions">
+			    <label class="checkbox field" for="user_terms">
+				    <%= f.check_box "terms" %> Agree to the Terms of Service and Privacy policies.
+			    </label>
+			  </dd>
+
+			</fieldset>
+
+			<div class="buttonBar">
+				<button class="rounded" type="submit">
+					<b><b>
+						Sign Up
+					</b></b>
+				</button>
+			</div> 
+		</div>
+	
+		<div id="openIdForm" class="jsHide signup box">	
+			<fieldset>
+				<div class="loginSelection">
+					<h1>Sign up using OpenID</h1>
+					<a href="#loginForm" class="useDetails">Use the old fashion way</a>
+				</div>
+				<dl class="fields">
+					<dt>
+						<label for="openid_url">OpenID URL</label>
+					</dt>
+					<dd>
+						<!-- <div class="full openid textfield"> -->
+							<%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'], { :class => "full openid textfield" } %>
+						<!-- </div> -->
+						<p class="tip">
+							<a href="http://www.openid.net/">OpenID</a> allows you to use a single identity multiple places.
+						</p>
+					</dd>
+					<!--
+					<dl class="noscreen">
+					  Terms and conditions
+					</dl>
+				  <dd class="termsAndConditions">
+				    <label class="checkbox field" for="openidterms">
+  				    <%= f.check_box "terms", :id => "openidterms" %> Agree to the Terms of Service and Privacy policies.
+				    </label>
+				  </dd>
+				  -->
+				</dl>
+			</fieldset>
+			
+			<div class="buttonBar">
+				<button class="rounded" type="submit">
+					<b><b>
+						Create my account!
+					</b></b>
+				</button>
+			</div>
+		</div>
+		
+	</div>
+	<% end -%>
+
+	<div class="clear box column" id="signup">
+		<h2>
+			Sign up for FREE as a Beta User
+		</h2>
+		<p>
+			For a limited time we're giving <strong>free annual subscriptions to our Beta users</strong>.
+		</p>
+		<p>
+			In exchange for you being a Beta user we're hoping you'll <strong>suggest features &amp; improvements</strong> (through the red "feedback" tab on the left of the page, or through email) and together we can make YourFlightLog even better!
+		</p>
+	</div>
+</div>

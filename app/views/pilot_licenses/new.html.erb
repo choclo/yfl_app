@@ -1,0 +1,21 @@
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "ratings" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<%= title("Which licenses do you currently hold?", "h1") %>
+	</div>
+	
+	<%- form_tag pilots_pilot_licenses_path do |f| -%>
+	
+	<%= error_messages_for :pilot, :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving your licenses:" %>
+	<%= flash_messages %>
+	
+	<%= render :partial => "pilot_licenses_list", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit"><b><b>Save and Finish</b></b></button>
+	</div>
+	
+	<%- end -%>
+</div>

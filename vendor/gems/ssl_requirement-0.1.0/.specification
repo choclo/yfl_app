@@ -1,0 +1,57 @@
+--- !ruby/object:Gem::Specification 
+name: ssl_requirement
+version: !ruby/object:Gem::Version 
+  version: 0.1.0
+platform: ruby
+authors: 
+- David Heinemeier Hansson
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-01-12 00:00:00 +00:00
+default_executable: 
+dependencies: []
+
+description: SSL requirement adds a declarative way of specifying that certain actions should only be allowed to run under SSL, and if they're accessed without it, they should be redirected.
+email: david@loudthinking.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- README
+- lib/ssl_requirement.rb
+- test/ssl_requirement_test.rb
+has_rdoc: true
+homepage: http://github.com/rails/ssl_requirement
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: SSL Requirement plugin
+test_files: 
+- test/ssl_requirement_test.rb

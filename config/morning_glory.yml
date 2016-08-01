@@ -1,0 +1,15 @@
+--- 
+production: 
+  delete_prev_rev: true
+  bucket: cdn.app.yourflightlog.com
+  s3_logging_enabled: true
+  enabled: true
+  revision: 5a7933e6300658af06e102686b30dc3b
+testing: 
+  enabled: false
+development: 
+  enabled: false
+staging: 
+  bucket: cdn.stage.yourflightlog.com
+  enabled: true
+  revision: cb7e57771ff6e1dff7e66dba4ee3059e

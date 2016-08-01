@@ -1,0 +1,79 @@
+<%- content_for :foot do -%>
+<%= javascript_include_tag "linkTableRows" %>
+<%- end -%>
+
+<table cellspacing="0" width="100%" class="pretty">
+	<caption>
+		<span class="log">All your logged flights</span>
+	</caption>
+	<thead>
+		<tr>
+			<th width="15%">
+				Date
+			</th>
+			<th width="45%">
+				Flying site
+			</th>
+			<th width="20%">
+				Flight Count
+			</th>
+			<th width="20%">
+				Air&ndash;time
+			</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td colspan="2">
+			</td>
+			<td class="total">
+				<strong>
+					<%= total_number_of_flights %>
+				</strong>
+			</td>
+			<td class="total">
+				<strong>
+					<%= total_air_time %>
+				</strong>
+			</td>
+		</tr>
+	</tfoot>
+	<tbody>
+<%- log_entries.each do |flight| -%>
+<%- if flight.is_starting_log_entry? -%>
+		<tr class="startingAirTime <%= cycle("even", "odd", :name => "row_class") -%>">
+			<td>
+				<span class="blank">&mdash;</span>
+			</td>
+			<td>
+				<em>Starting air-time</em> <span class="metaLink">(<%= link_to "Edit", edit_pilots_path, :class => "edit" %>)</span>
+			</td>
+			<td>
+				<%= flight.number_of_flights %>
+			</td>
+			<td>
+				<%= pretty_decimal(flight.air_time, 1) %> 
+			</td>
+		</tr>
+<%- else -%>
+		<tr class="<%= cycle("even", "odd", :name => "row_class") -%>">
+			<td>
+				<%= flight.date.strftime(current_user.pilot.preferences.date_format) %>
+				<%# link_to flight.date.strftime(current_user.pilot.preferences.date_format), pilots_log_entry_path(flight) %>
+			</td>
+			<td>
+				<%= link_to h(flight.location.name), pilots_log_entry_path(flight) %>
+			</td>
+			<td>
+				<%= flight.number_of_flights %>
+			</td>
+			<td>
+				<%= pretty_decimal(flight.air_time, 1) %>
+			</td>
+		</tr>
+<%- end -%>
+<%- end -%>
+	</tbody>
+</table>
+
+<%= will_paginate log_entries %>

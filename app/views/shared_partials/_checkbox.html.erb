@@ -1,0 +1,8 @@
+<%- 
+checkbox_class = checkbox.class.name.tableize
+checkbox_id = "#{checkbox_class}#{checkbox.id}" 
+-%>
+
+<div class="checkbox field">
+	<label for="<%= checkbox_id %>"><%= check_box_tag "#{checkbox_class}[]", checkbox.id, selected.include?(checkbox), :id => checkbox_id %><%= checkbox.name %></label>
+</div>

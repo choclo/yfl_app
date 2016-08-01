@@ -1,0 +1,27 @@
+<%- current_navigation_tab :settings, :profile -%>
+<%- title("Pilot Profile | Settings") -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "pilot" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>Edit Pilot Profile</h1>
+		<h2>Tell us a bit more about yourself&hellip;</h2>
+	</div>
+	
+	<%- form_for current_pilot, :url => { :action => :update } do |f| -%>
+	
+	<%= render :partial => "pilot_info_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit">
+			<b><b>
+				Save Changes
+			</b></b>
+		</button>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_log_entry_index_path, :title => "Don't save any changes, just return to the flight log", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

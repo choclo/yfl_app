@@ -1,0 +1,35 @@
+<div class="box">
+	<div class="pageTitle">
+		<%= title("Export Flight Log", "h1") %>
+		<h2>Take your data with you</h2>
+	</div>
+	
+	<div class="featureBox">
+		<p>
+			YourFlightLog.com is built around open and shared data standards, and makes it easy for you to export
+			your flight log at any time in a couple of formats.
+		</p>
+		
+		<hr />
+		
+		<h3>Export to XML</h3>
+		<p>
+			XML is a industry standard data format and is probably the best format to export your data to for 
+			compatibility with a wide range of applications.
+		</p>
+		<p>
+			<%= link_to 'Export Flight Log to XML', formatted_pilots_log_entry_index_path(:format => "xml") %>
+		</p>
+		
+		<hr />
+		
+		<h3>Future format support</h3>
+		<p>
+			In the future we will also be able to export to other formats. At this time the plan is to export to
+			JSON (JavaScript Object Notation form) as well as CVS (Comma Separated Variables).
+		</p>
+		<p>
+			If you would like to see any more formats supported please contact YourFlightLog with your suggestions.
+		</p>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+<%- 
+name = name || nil
+radiobutton_class = name || radiobutton.class.name.tableize
+radiobutton_id = "#{radiobutton_class}_#{radiobutton.id}"
+selected ||= []
+is_selected = selected.include?(radiobutton) || selected.include?(radiobutton.id)
+-%>
+<div class="radiobutton field">
+	<label for="<%= radiobutton_id %>"><%= radio_button_tag "#{radiobutton_class}", radiobutton.id, is_selected, :id => radiobutton_id %><%= radiobutton.name %></label>
+</div>

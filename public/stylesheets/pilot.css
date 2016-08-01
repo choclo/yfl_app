@@ -1,0 +1,8 @@
+div.settings a { color: #677FA2; text-decoration: none; }
+div.settings a:hover h2 { text-decoration: underline; }
+div.settings h2 { margin-bottom: 0; font-size: 16px; color: #3b586d; margin: 5px 0; font-size: 16px; text-transform: capitalize; cursor: pointer; text-shadow: 0 1px 0 #FFFFFF; }
+div.settings p { line-height: 1.5em; }
+div.settings .sprite { background: transparent url(/images/icons/sprite-settings.png) no-repeat 0 0; float: left; width: 68px; height: 68px; margin-right: 10px; }
+div.settings .licensesIcon { background-position: -68px 0; }
+div.settings .displayIcon { background-position: -136px 0; }
+div.settings p { margin-left: 80px; margin-right: 20px; }

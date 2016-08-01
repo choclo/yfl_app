@@ -1,0 +1,17 @@
+/* * */
+
+.carouselWrapper { position: relative; display: block; margin: 0 3px 0 0; border: 1px solid #fff; overflow: visible; width: 600px; background-color: #fff; }
+.carouselWrapper .next, .carouselWrapper .prev { width: 40px; height: 48px; background: url(/images/carousel-nav-btns.png) no-repeat 0 0; text-indent: -999em; position: absolute; z-index: 10; top: 37%; }
+.carouselWrapper .prev { left: -39px; }
+.carouselWrapper .prev:hover { background-position: 0 -48px; }
+.carouselWrapper .prev.disabled { background-position: 0 -96px; }
+.carouselWrapper .next { right: -39px; background-position: top right; }
+.carouselWrapper .next:hover { background-position: 100% -48px; }
+.carouselWrapper .next.disabled { background-position: 100% -96px; }
+
+.carousel { border: 1px solid #b4b4b4; border-color: #707070 #ababab #cecece; color: #222; margin: 0; float: left; min-height: 200px; width: 600px; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; }
+.carousel ul { text-align: center; list-style-type: none; }
+.carousel li { width: 300px; height: 200px; }
+.carousel li a { position: relative; max-height: 200px; }
+.carousel span.zoom { display: block; width: 38px; height: 38px; position: absolute; bottom: 0; right: 0; background: url(/images/btn-zoom.png) no-repeat 0 0; text-indent: -9999em; opacity: 0.5; }
+.carousel a:hover span.zoom { opacity: 1; }

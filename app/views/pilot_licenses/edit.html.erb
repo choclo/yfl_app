@@ -1,0 +1,25 @@
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "ratings" %>
+<%- end -%>
+<%- current_navigation_tab :settings, :licenses -%>
+<%- title("Pilot Licenses | Settings") -%>
+<div class="box">
+	<div class="pageTitle">
+		<%= title "Which licenses do you currently hold?", "h1" %>
+	</div>
+	
+	<%- form_tag :action => :update do |f| -%>
+	
+	<%= error_messages_for :pilot, :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving your licenses:" %>
+	<%= flash_messages %>
+	
+	<%= render :partial => "pilot_licenses_list", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit"><b><b>Save Licenses</b></b></button>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_log_entry_index_path, :title => "Don't save any changes, just return to the flight log", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

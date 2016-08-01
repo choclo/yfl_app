@@ -1,0 +1,39 @@
+<fieldset class="container">
+	<legend class="noscreen">Licenses</legend>
+
+	<dl class="leftLabels fieldValues" id="pilotsLicensesList">
+<%- AircraftType.all.each do |aircraft| -%>
+		<dt>
+			<%= label_tag nil, "#{aircraft.name}" %>
+		</dt>
+		<dd>
+	<%- 
+	licenses = License.find(:all, :conditions => [ "(aircraft_type_id = :aircraft_id AND pilot_id is null AND (country = :country OR country is null)) OR (aircraft_type_id = :aircraft_id AND pilot_id = :pilot_id)", { :aircraft_id => aircraft.id, :country => current_pilot.country, :pilot_id => current_pilot.id } ])
+	
+	if licenses.empty?
+	-%>
+		<p class="tip">
+			We do not currently have a complete default list of <%= aircraft.name %> licenses offered within your home country, <%= current_pilot.country %>.
+		</p>
+	<%- else -%>
+			<div id="<%= aircraft.slug %>Licenses" class="clearfix fields">
+				<% for license in licenses %>
+					<%= render :partial => 'shared_partials/checkbox', :locals => { :checkbox => license, :selected => current_pilot.licenses } %>
+					<% if license.pilot_id == current_pilot.id %>
+					<span class="metaLink">(<%= link_to "edit", edit_pilots_license_path(license) %>)</span>
+					<% end %>
+					<%# 
+						render :partial => 'shared_partials/checkbox', 
+								:collection => licenses, 
+								:locals => { :selected => current_pilot.licenses }
+					%>
+				<% end %>
+			</div>
+	<%- end -%>	
+		<p class="tip">
+			<%= link_to "Add a new custom #{aircraft.name} license", new_pilots_license_path(:aircraft_type_id => aircraft.id, :country => current_pilot.country) %>.
+		</p>
+		</dd>
+<%- end -%>
+	</dl>
+</fieldset>

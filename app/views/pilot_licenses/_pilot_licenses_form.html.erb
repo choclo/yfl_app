@@ -1,0 +1,40 @@
+<%- content_for :head do -%>
+
+<%- end -%>
+<fieldset class="container">
+	<legend class="noscreen">Licenses</legend>
+	
+	<%= flash_messages %>
+	
+	<%- 
+	AircraftType.all.each do |aircraft| 
+	-%>
+	<fieldset class="<%= aircraft.slug %> ratings">
+		<legend><%= aircraft.name %></legend>
+		<%- 
+		licenses = License.find_all_by_aircraft_type_id_and_country(aircraft.id, current_pilot.country)
+		if licenses.empty?
+		-%>
+			<p class="tip">
+				Sorry, we do not currently have a complete default list of <%= aircraft.name %> licenses offered within <%= current_pilot.country %>.
+				<br />
+				You can manually <a href="#">add a license</a>.
+			</p>
+		<%-
+		else
+		-%>
+		<dl id="<%= aircraft.slug %>License" class="fields">
+			<dd>
+				<%= 
+					render 	:partial => 'shared_partials/checkbox', 
+							:collection => licenses, 
+							:locals => { :selected => current_pilot.licenses }
+				%>
+			</dd>
+		<%- 
+			end 
+		-%>	
+		</dl>
+	</fieldset>
+	<%- end -%>
+</fieldset>

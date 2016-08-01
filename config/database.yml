@@ -1,0 +1,8 @@
+production:
+  adapter: mysql
+  host: localhost
+  encoding: utf8
+  database: production_yourflightlog
+  username: yfl_db
+  password: paraglid3rpil0t
+  port: 3306

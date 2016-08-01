@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title><%= @page_title || APP_CONFIG[:site_name] %> | YourFlightLog</title>
+		<meta http-equiv="content-type" content="text/xhtml; charset=utf-8" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="distribution" content="all" />
+		<meta name="robots" content="all" />	
+		<meta name="resource-type" content="document" />
+		<meta name="MSSmartTagsPreventParsing" content="true" />
+		<link rel="icon" type="image/png" href="/images/favicon.png"/>
+		<%= stylesheet_link_tag "master", "/javascripts/facebox/facebox.css" %>
+		
+		<!--[if lt IE 8]>
+    <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js">IE7_PNG_SUFFIX=".png";</script>
+    <![endif]-->
+    
+		<!--[if IE 6]>
+		<%= stylesheet_link_tag 'ie6' %>
+		<![endif]-->
+		<%= yield :head %>
+	</head>
+	<body<%= !logged_in? ? " class=\"unauthorised\"" : "" %>>
+		<script type="text/javascript">
+		//<![CDATA[
+		(function() {
+			var body = document.getElementsByTagName('body')[0];
+			var jsClass = 'js';
+			if (body.className !== '') {
+				body.className += ' ' + jsClass;
+			} else {
+				body.className = jsClass;
+			}
+		})();			
+		//]]>
+		</script>
+		<%- if logged_in? -%>
+		<div id="access" class="noscreen noprint">
+			Skip to <a href="#content">content</a>, <a href="#nav">main navigation</a>, <a href="#sectionNav">section navigation</a>.
+		</div>
+		<%- end -%>
+		
+		<div id="wrapper">
+			
+			<div id="header">				
+				<h1>
+					<a href="/">
+						<%= image_tag 'header/logo-paperplane.png', :alt => 'YourFlightLog', :size => '72x46' %> 
+						<span class="noscreen">YourFlightLog.com</span>
+					</a>
+				</h1>
+				
+				<%- if logged_in? -%>
+					<%= render :partial => "/layouts/navigation" %>
+				<%- end -%>
+			</div>
+			
+			<hr class="noscreen" />
+
+			<div id="content">
+				<%= yield %>
+			</div>
+			
+			<hr class="noscreen" />
+			
+			<div id="footer">
+				<p>
+					&copy; <a href="http://www.superherolabs.com/">Superhero Labs Ltd</a> | England and Wales company #07136232 | Email support@superherolabs.com | 4/178 Holland Road, London
+				</p>
+			</div>
+		</div>
+		
+		<div id="betaTab">
+    	<a href="#beta" rel="facebox">
+    		<%= image_tag 'beta-software-tab.png', :alt => 'YourFlightLog is beta software' %>
+    	</a>
+    </div>
+
+    <div id="beta" title="This is Beta software">
+    	<h2>YourFlightLog is Beta Software.</h2>
+    	<h3>What does that mean?</h3>
+    	<p>A beta release of a website is part of the ongoing development phase of the product. It's aim is to introduce users to the service and to elicit their feedback, shaping the product to best meet their needs.</p>
+    	<p>Because the software is still in development there may be rare bugs (rare because we spend a lot of time testing the quality of our code before a release). So, to keep things fair we don't charge anyone who signs up as a Beta user &ndash; Win, win.</p>
+    </div>
+    
+		<!-- scripts -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>		
+<%# 
+  #		<!--[if lte IE 6]>
+  #		<%= javascript_include_tag "supersleight.plugin" % >
+  #		<script type="text/javascript">
+  #		$('body').supersleight({ shim: '/images/x.gif' });
+  #		</script>
+  #		<![endif]-->
+ %>		
+		<%= javascript_include_tag "application", "facebox/facebox.js" %>
+		
+		<%= yield :foot %>
+		
+		<%- if not @map.nil? -%>
+		<%= GMap.header %>
+		<%= javascript_include_tag("markerGroup") %> 
+		<%= javascript_include_tag("location-map") %> 
+		<%= @map.to_html %>
+		<%- end -%>
+		
+		<script type="text/javascript">
+		var uservoiceOptions = {
+		  key: 'yourflightlog',
+		  host: 'yourflightlog.uservoice.com', 
+		  forum: '5555',
+		  alignment: 'left',
+		  background_color:'#0088ff', 
+		  text_color: 'white',
+		  hover_color: '#0066CC',
+		  lang: 'en',
+		  showTab: true
+		};
+		function _loadUserVoice() {
+		  var s = document.createElement('script');
+		  s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "uservoice.com/javascripts/widgets/tab.js";
+		  document.getElementsByTagName('head')[0].appendChild(s);
+		}
+		_loadSuper = window.onload;
+		window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+		</script>
+		
+		<script type="text/javascript" charset="utf-8">
+		  $(function() {
+		    $('a[rel*=facebox]').facebox();
+		  });
+		</script>
+		
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-161932-9']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+	</body>
+</html>

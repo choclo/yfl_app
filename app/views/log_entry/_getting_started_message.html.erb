@@ -1,0 +1,34 @@
+<%- 
+msg_id = 'getting-started-message'
+
+return if !system_message_is_visible(msg_id)
+-%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag msg_id %>
+<%- end -%>
+
+<div id="<%= msg_id %>" class="systemMessage">
+	<img src="/images/flash/notice.png" alt="Getting started" class="icon" />
+	<a href="#" class="close">
+		Hide getting started message
+	</a>
+	<h3>
+		Welcome to YourFlightLog, <%= current_user.pilot.name %>
+	</h3>
+	<div class="menu">
+		<p>
+			Using YourFlightLog is easy, but there is some initial setup stuff that you should do to get you started&hellip;
+		</p>
+		<ul>
+			<li class="location">
+				<%= link_to "<h4>Add locations</h4><span class=\"description\">Where do you fly? When adding new flights you can select locations from a drop down list or map view.</span>", new_pilots_location_path %>
+			</li>
+			<li class="equipment">
+				<%= link_to "<h4>Add equipment</h4><span class=\"description\">Track your equipments usage and store important information like serial numbers.</span>", new_pilots_equipment_path %>
+			</li>
+			<li class="preferences">
+				<%= link_to "<h4>Edit preferences</h4><span class=\"description\">Set which measurement units for speed, distance, altitude, as well as time-zone and date-format settings</span>", edit_pilots_preferences_path %>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,80 @@
+@import colours.sass
+@import mixins.sass
+
+.carouselWrapper
+  position: relative
+  display: block
+  margin: 0 3px 0 0
+  border: 1px solid #fff
+  overflow: visible
+  width: 600px
+  background-color: #fff
+
+  .next, .prev
+    width: 40px
+    height: 48px
+    background: url(/images/carousel-nav-btns.png) no-repeat 0 0
+    text-indent: -999em
+    position: absolute
+    z-index: 10
+    top: 37%
+
+  .prev
+    left: -39px
+    
+    &:hover
+      background-position: 0 -48px
+
+    &.disabled
+      background-position: 0 -96px
+
+  .next
+    right: -39px
+    background-position: top right
+
+    &:hover
+      background-position: 100% -48px
+
+    &.disabled
+      background-position: 100% -96px
+
+.carousel
+  border: 1px solid #b4b4b4
+  border-color: #707070 #ababab #cecece
+  color: #222
+  margin: 0
+  float: left
+  min-height: 200px
+  width: 600px
+  +boxsizing
+  
+  ul
+    text-align: center
+    list-style-type: none
+
+  li
+    width: 300px
+    height: 200px
+    
+    a
+      position: relative
+      //display: block
+      max-height: 200px
+    
+  span.zoom
+    display: block
+    width: 38px
+    height: 38px
+    position: absolute
+    bottom: 0
+    right: 0
+    background: url(/images/btn-zoom.png) no-repeat 0 0
+    text-indent: -9999em
+    opacity: 0.5
+
+  a:hover span.zoom
+    //background-position: 0 -40px
+    opacity: 1
+
+  //a:focus span.zoom, a:active span.zoom
+    //background-position: 0 -80px

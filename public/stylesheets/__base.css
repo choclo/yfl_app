@@ -1,0 +1,525 @@
+/**
+ blue - 0087ef
+ blue hover - 0074cc
+ blue shadow - afcde4
+ title blue - 89a1b3
+ body blue - e1e9f0
+ gray - 3b3b3b
+*/
+
+/** Reset CSS */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align: middle; }
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }
+a img { border: none; }
+
+input.button, button {
+    padding: 0 .25em;
+    width: 0;  /* IE table-cell margin fix */
+    overflow: visible;
+}
+input.button[class], button[class] {  /* IE < 7 ignores [class] */
+    width: auto;  /* cancel margin fix for other browsers */
+}
+td input.button[class], td button[class] {
+    width: 100%;
+}
+
+/** Header */
+body {
+	border-top: 3px solid #0087ef;
+	margin: 0;
+	padding: 0;
+	font: normal 62.5%/1.5 Arial, Verdana, sans-serif;
+	color: #111;
+}
+
+h1,  h2, h3, h4,  h5,  h6 {
+	font-family: 'Myriad Pro', Helvetica, Arial, sans-serif;
+	font-weight: bold; 
+	text-shadow: #fff 0 1px 0; /* Safari: cleanup text rendering and add pleasent drop shadow */
+	color: #242424;
+	cursor: default;
+}
+h2 {
+	font-size: 1.5em;
+	margin: 0.5em 0;
+}
+h3 {
+	font-size: 1.2em;
+}
+h4 {
+	font-size: 1.1em;
+	color: #000;
+}
+h5 {
+
+}
+
+ul {
+	list-style-type: disc;
+	margin: 0 0 1em 1.5em;
+}
+
+a {
+	color: #0074cc;
+	text-decoration: underline;
+}
+a:hover {
+	color: #0087ef;
+	text-decoration: none;
+}
+
+.noscreen { position: absolute; left: -9999em; }
+legend.noscreen { display: none; }
+
+/* Form elements */
+button.rounded {
+	border: 0;
+	padding: 0;
+	background: none;
+	cursor: pointer;
+}
+button.rounded b {
+	display: block;
+	border: 0;
+	background: url(/images/btn-rounded.png) no-repeat top left;
+	padding: 0 0 0 30px;
+	white-space: nowrap;
+}
+button.rounded b b {
+	display: block;
+	height: 35px;
+	line-height: 35px;
+	padding: 0 30px 0 0;
+	background: url(/images/btn-rounded.png) no-repeat top right;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #3b3b3b;
+	text-shadow: #fff 0 1px 0; /* Safari: cleanup text rendering and add pleasent drop shadow */
+}
+button.rounded:hover b {
+	background-position: bottom left;
+}
+button.rounded:hover b b {
+	background-position: bottom right;
+}
+
+.fields .field label {
+	float: left;
+}
+.fields .field div {
+	display: block;
+	margin: 0;
+	border: 1px solid #fff;
+	float: left;
+	clear: both;
+	overflow: hidden;
+	height: 1%;
+}
+.fields .field .field {
+	border: 0;
+}
+.fields .field div input,
+.fields .field div textarea,
+.fields .field div select {
+	border: 1px solid #b4b4b4;
+	border-color: #707070 #ababab #cecece;
+	background: #fff url(/images/widget/bg-input.png) no-repeat 0 0;
+	padding: 4px 3px;
+	margin: 0;
+	font-size: 1.2em;
+	width: auto;
+	float: left;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.fields .field div select {
+	padding: 2px;
+	height: 2em;
+	background: #fff;
+}
+.fields .field div input:focus, 
+.fields .field div input:active,
+.fields .field div textarea:focus, 
+.fields .field div textarea:active {
+	width: 100%;
+	border-color: #afcde4;
+	background: #fff;
+}
+.fields .field div textarea {
+	font: inherit;
+	font-size: 1.1em;
+	padding: 3px;
+}
+.fields .field .fieldWithErrors input, .fields .field .fieldWithErrors select, .fields .field .fieldWithErrors textarea {
+	border-color: red;
+	margin: 0;
+}
+
+div.field {
+	margin: 0 0 1.5em 0;
+	overflow: hidden;
+}
+/* Text thats on the same line as a field */
+.fieldText {
+	line-height: 2.2em;
+	margin: 0 6px
+}
+
+div.numeric input {
+	text-align: center;
+}
+
+/* Input widths */
+.fields .field .tiny {
+	width: 10%;
+}
+.fields .field .small {
+	width: 25%;
+}
+.fields .field .medium {
+	width: 50%;
+}
+.fields .field .large {
+	width: 75%;
+}
+.fields .field .huge {
+	width: 99%;
+}
+
+/* Fix the input to the container */
+.fields .field .tiny input, .fields .field .small input, .fields .field .medium input, .fields .field .large input, .fields .field .huge input,
+.fields .field .tiny textarea, .fields .field .small textarea, .fields .field .medium textarea, .fields .field .large textarea, .fields .field .huge textarea,
+.fields .field .tiny select, .fields .field .small select, .fields .field .medium select, .fields .field .large select, .fields .field .huge select {
+	width: 100%;
+}
+
+.fields .field div.dateselect select {
+	width: auto;
+}
+
+.halfWidth {
+	width: 50%;
+	float: left;
+}
+#content .twoColumns .fields {
+	width: 420px;
+	margin-left: 30px;
+	clear: none;
+	float: left;
+}
+#content .twoColumns .firstColumn {
+	margin-left: 0;
+	width: 420px;
+}
+
+
+
+p.tip {
+	color: #89a1b3;
+	font-size: 0.9em;
+}
+
+/* Message boxes */
+.messagebox {
+	padding: 15px 30px;
+	margin: 0 0 15px 0;
+	background: #eee;
+}
+div.error {
+/*	background: #ff5938;	*/
+	color: #C00;
+}
+
+/** */
+#wrapper {
+	width: 950px;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+#header {
+	position: relative;
+	overflow: hidden;
+}
+
+ul#util {
+	float:right;
+	text-align: right;
+	font-size: 1.2em;
+	color: #3b3b3b;
+	margin: 0;
+}
+ul#util li {
+	display: inline;
+	padding: 0 0 0 8px;
+	margin: 0 4px 0 0;
+	background: url(/images/header/bg-sep.png) no-repeat 0 0;
+}
+ul#util li.first {
+	background: none;
+}
+ul#util a {
+	color: #0087ef;
+	text-decoration: none;
+}
+ul#util a:hover {
+	color: #0074cc;
+	text-decoration: underline;
+}
+
+ul#nav {
+	margin: 0;
+	width: 100%;
+	clear: both;
+	float: left;
+	list-style-type: none;
+	letter-spacing: -0.01em;
+	background: url(/images/header/bg-nav.png) repeat-x 0 100%;
+}
+ul#nav li {
+	float: left;
+	padding-bottom: 5px;
+	background: #3b3b3b url(/images/header/bg-nav.png) repeat-x 0 100%;
+}
+ul#nav li a {
+	float: left;
+	background-color: #0087ef;
+	border-left: 1px solid #e1e9f0;
+	color: #fff;
+	text-decoration: none;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 35px;
+	font-size: 1.8em;
+}
+ul#nav li a:hover {
+	text-decoration: underline;
+}
+ul#nav li.first a {
+	border-left: 0;
+}
+ul#nav li#btnAddFlight {
+	float: right;
+	background: none;
+}
+ul#nav li#btnAddFlight a {
+	font-size: 1.5em;
+	border: 0;
+	background: url(/images/header/btn-add-flight.png) no-repeat 0 0;
+	width: 112px;
+	height: 35px;
+	line-height: 35px;
+	padding: 0 0 0 20px;
+	margin: 5px 0 0 0;
+}
+ul#nav li#btnAddFlight a:hover {
+	color: #3b3b3b;
+	text-decoration: none;
+	background-position: 0 100%;
+}
+ul#nav li#btnAddFlight a span {
+	display: none;
+}
+
+ul#nav li.selected {
+	background: #0087ef url(/images/header/bg-nav-selected.png) no-repeat 50% 100%;
+}
+ul#nav li.selected a, ul#nav li a:active, ul#nav li a:focus {
+	background: #0087ef url(/images/header/bg-nav-selected-link.png) repeat-x 0 0;
+}
+
+ul#sectionNav {
+	margin: 0;
+	float: left;
+	width: 100%;
+	list-style-type: none;
+	background: #3b3b3b;
+	font-size: 1.3em;
+	padding: 5px 0;
+}
+ul#sectionNav li {
+	float: left;
+	padding: 0 0 0 8px;
+	margin: 0 8px 0 0;
+}
+ul#sectionNav li.first {
+	background: none;
+	margin-left: 10px;
+}
+ul#sectionNav li a {
+	color: #e1e9f0;
+	padding: 5px;
+	text-decoration: none;
+}
+ul#sectionNav li a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+#content {
+	clear: both;
+	font-size: 1.2em;	
+}
+
+#footer {
+	font-size: 1.1em;
+	padding: 15px;
+	color: #ccc;
+	border-top: 3px solid #eee;
+	text-align: right;
+	clear: both;
+}
+
+/* Titles */
+#content div.pageTitle {
+	height: 1.3em;
+/*	width: 100%;	*/
+	overflow: hidden;
+	padding: 0 10px;
+	margin: 10px 0;
+	font-size: 2.2em;
+	line-height: 1;
+}
+#content div.pageTitle h2 {
+	float: left;
+	line-height: 1.2;
+	letter-spacing: -0.04em;
+}
+
+/* Secondary title - used to show stats and page-wide messages */
+#content div.pageTitle h3 {
+	float: right;
+	color: #afcde4;
+	font-weight: bold;
+	font-size: 1em;
+	margin: 0;
+}
+#content div.pageTitle h3 em {
+	float: left;
+	font-size: 0.4666em;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 2.5em;
+	margin-right: 5px;
+	color: #89a1b3;
+}
+
+/* A box in which the forms and contents live */
+div.buttonBar {
+	margin: 0 -10px;
+}
+div.buttonBar span.or {
+	font-size: 1.2em;
+	margin: 0 0.5em;
+	color: #688;
+	font-weight: bold;
+}
+div.buttonBar a.cancel {
+	font-size: 1.2em;
+	font-weight: bold;
+	text-decoration: none;
+	border-bottom: 1px solid #0087ef;
+}
+
+#content div.box {
+	background: #e1e9f0;
+	border-top: 2px solid #afcde4;
+	border-bottom: 1px solid #afcde4;
+	padding: 15px;
+	overflow: hidden;
+}
+#content .featureBox, #content .container {
+	clear: both;
+	padding: 10px;
+}
+#content .featureBox{
+	background: #fff;
+	border: 2px solid #afcde4;
+	padding: 15px;
+}
+#content p {
+	margin: 0 0 1em 0;
+}
+#content label {
+	font-weight: bold;
+	color: #3b3b3b;
+}
+#content label em {
+	font-weight: normal;
+	font-style: normal;
+	color: #89a1b3;
+}
+#content .checkbox label {
+	font-weight: normal;
+}
+
+
+/* === FLASH MESSAGES === */
+div#flash-notice {
+	
+}
+
+div#flash-warning {
+	
+}
+
+div#flash-error {
+	
+}
+
+/* === ERROR MESSAGES === */
+div#errorExplanation {
+	
+}
+
+div#errorExplanation h2 {
+	
+}
+
+div#errorExplanation p {
+	
+}
+
+div#errorExplanation ul {
+	
+}
+
+div#errorExplanation ul li {
+	
+}
+
+/* === FORMS === */
+div.fieldWithErrors {
+	
+}
+
+div.fieldWithErrors label {
+	
+}
+
+div.fieldWithErrors input, div.fieldWithErrors select, 
+div.fieldWithErrors textarea
+{
+	
+}

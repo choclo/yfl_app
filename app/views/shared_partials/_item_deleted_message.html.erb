@@ -1,0 +1,20 @@
+<%- 
+msg_id = 'item-deleted-message'
+
+# The type of item (item, flight, equipment)
+item_type ||= "item"
+
+return if !system_message_is_visible(msg_id)
+-%>
+
+<%# content_for :head do %>
+<%# stylesheet_link_tag msg_id %>
+<%# end %>
+
+<div id="<%= msg_id %>" class="systemMessage">
+	<img src="/images/flash/warning.png" alt="Warning" class="icon" />
+	<h3>This <%= item_type %> has been marked as deleted</h3>
+	<p>
+		TODO
+	</p>
+</div>

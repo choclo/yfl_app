@@ -1,0 +1,68 @@
+<%- current_navigation_tab :flight_log, :new -%>
+<div class="box">
+	<div class="pageTitle">
+		<%- title('For which type of aircraft?', 'h1') -%>
+		<h1>
+			<%= link_to "Flight Log", pilots_log_entry_index_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			For which type of aircraft?
+		</h1>
+	</div>
+		
+	<fieldset class="container">
+		<legend class="noscreen">Glider types</legend>
+		
+<%- form_for new_pilots_log_entry_path(current_pilot), :html => { :method => :get } do |f| -%>
+	<%- if current_pilot.licenses.empty? -%>
+		<p>You haven't provided any details of your current aircraft licenses yet, so <strong>we don't know the aircraft type for this flight</strong>. You have two options:</p>
+		<div class="twoColumns">
+			<div class="firstColumn column">
+				
+				<h3>Option 1: Manually select the aircraft type&hellip;</h3>
+				<div id="promptForAircraftTypeList" class="clearfix container">
+					<%= 
+						render 	:partial => 'shared_partials/radiobutton', 
+								:collection => @aircraft_types,
+								:locals => { :selected => [ @aircraft_types.first ], :name => 'aircraft_type_id' }
+					%>
+				</div>
+				<div class="clearfix">
+					<button class="rounded" type="submit" title="Save equipment">
+						<b><b>
+							Select and Continue &rarr;
+						</b></b>
+					</button>
+				</div>
+			</div>
+			
+			<div class="column">
+				<h3>Option 2: Skip this screen next time&hellip;</h3>
+				<p>Tell us what licenses you have and you may be able to skip this screen next time (if you only fly one type of aircraft).</p>
+				<div class="clearfix">
+					<%= link_to '<span>Configure your aircraft licenses</span>', pilots_pilot_licenses_path, :class => "secondary" %>
+				</div>
+			</div>
+		</div>
+
+	<%- else -%>
+		<p>Since you're a clever cookie and can fly more than one type of glider, which type is this entry for?</p>
+		<h3>This flight log entry is for a&hellip;</h3>
+		<div id="promptForAircraftTypeList" class="clearfix container">
+			<%= 
+				render 	:partial => 'shared_partials/radiobutton', 
+						:collection => @aircraft_types, 
+						:locals => { :selected => [ @aircraft_types.first ], :name => 'aircraft_type_id' }
+			%>
+		</div>
+		<div class="clearfix">
+			<button class="rounded" type="submit" title="Save equipment">
+				<b><b>
+					Select aircraft type and continue
+				</b></b>
+			</button>
+		</div>
+	<%- end -%>
+	</fieldset>
+	
+<%- end # form_for -%>
+</div>

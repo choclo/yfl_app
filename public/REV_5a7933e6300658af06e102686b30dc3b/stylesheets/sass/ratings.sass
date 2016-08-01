@@ -1,0 +1,33 @@
+@import colours
+
+!rating_left_padding = 150px
+
+fieldset.container 
+	padding-top: 0
+	
+#licenseDisplayOrderList
+	list-style-type: none
+	width: 50%
+	margin-top: 1em
+	
+	li
+		margin: 0 0 0.5em 0
+	
+		&.existingLicense
+			padding-left: 1.6em
+			font-weight: bold
+			color = !blue_title
+			border = "1px solid #{!blue_shadow}"
+			border-left: 0
+			border-right: 0
+			background-color = !blue_body + #111
+			
+	li label
+		display: block
+		float: none
+		clear: none
+		margin: 0	
+
+
+#pilotsLicensesList .metaLink
+	float: left

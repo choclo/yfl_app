@@ -1,0 +1,126 @@
+<%- content_for :head do -%>
+<%- end -%>
+<fieldset class="container">
+	<legend class="noscreen">Location</legend>
+
+	<dl class="leftLabels fields">
+		<dt>
+			<%= f.label :name, "Site Name" %>
+		</dt>
+		<dd>
+			<!-- <div class="medium textfield"> -->
+				<%= f.text_field :name, :class => 'medium textfield' %>
+			<!-- </div> -->
+			<em class="tip">Something easy for you to remember and pick from a list when you're entering your flight log entries</em>
+			<%= f.error_message_on :name, "Flying site location name " %>
+		</dd>
+		<dt>
+			<%= f.label :altitude_masl, 'Altitude of Launch' %>
+		</dt>
+		<dd>
+			<div>
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= f.text_field :altitude_masl, :size => 4, :value => pretty_decimal(@location.altitude_masl), :class => 'tiny numeric textfield' %>
+				<!-- </span>  -->
+				<span class="fieldText">
+					<%= height_unit %> <abbr title="Above Sea Level">ASL</abbr>
+				</span>
+			</div>
+			<em class="tip">How high is the launch at this location (in <%= height_unit %> above sea level)</em>
+			<%= f.error_message_on :altitude_masl, "Altitude ", "... unless you're doing some sort of wierd underwater flying. In which case you're on the wrong website." %>
+		</dd>
+		<dt>
+			<%= f.label :description, 'Description' %>
+		</dt>
+		<dd>
+			<!-- <div class="full textarea"> -->
+				<%= f.text_area :description, :rows => 4, :cols => 100, :class => 'full textarea' %>
+			<!-- </div> -->
+			<em class="tip">Details like access, hill shape, favourable weather conditions, etc</em>
+		</dd>
+		<dt>
+			<%= f.label :lat, 'Where is it?' %>
+		</dt>
+		<%- if @location.lat && @location.lng && @map -%>
+		<dd>
+			<%= f.label :lat, "Latitude:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :lat, :class => 'small textfield' %>
+			<!-- </span> -->
+			<%= f.error_message_on :lat, "Latitude " %>
+		</dd>
+		<dd>
+			<%= f.label :lng, "Longitude:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :lng, :class => 'small textfield' %>
+			<!-- </span> -->
+			<%= f.error_message_on :lng, "Latitude " %>
+		</dd>
+		<dd>
+			<p class="tip">Drag and drop the Location market into the right spot. The coordinates will be updated for you.</p>
+			<%= @map.div(:width => 770, :height => 400) %>
+		</dd>
+		<%- else -%>
+		<dd>
+			<p class="rounded noMap">
+				<strong>There's no map for this location. Tell us where it is and we'll do our best to find it.</strong>
+			</p>
+		</dd>
+		<dd>
+			<p class="tip">
+				Enter the <strong>GPS Coordinates</strong> of this flying site if you know them&hellip;
+			</p>
+		</dd>
+		<dd>
+			<%= f.label :lat, "Latitude:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :lat, :class => 'small textfield' %>
+			<!-- </span> -->
+			<%= f.error_message_on :lat, "Latitude " %>
+		</dd>
+		<dd>
+			<%= f.label :lng, "Longitude:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :lng, :class => 'small textfield' %>
+			<!-- </span> -->
+			<%= f.error_message_on :lng, "Latitude " %>
+		</dd>
+		<dd>
+			<h2 class="or">or</h2>
+			
+			<p class="tip">
+				You can <strong>use a rough address</strong> to ask Google Maps where it is. 
+				Most flying sites don't have an exact street address, so give as much information as you can. 
+				You can drag the location marker into the correct position after it's been found.
+			</p>
+		</dd>
+		<dd>
+			<%= f.label :address1, "Address 1:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :address1, :class => 'small textfield' %>
+			<!-- </span> -->
+		</dd>
+		<dd>
+			<%= f.label :address2, "Address 2:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :address2, :class => 'small textfield' %>
+			<!-- </span> -->
+		</dd>
+		<dd>
+			<%= f.label :address3, "Address 3:" %>
+			<!-- <span class="small textfield"> -->
+				<%= f.text_field :address3, :class => 'small textfield' %>
+			<!-- </span> -->
+		</dd>
+		<dd>
+			<%= f.label :country, "Country:" %>
+			<!-- <div class="small select"> -->
+				<%= f.country_select :country, nil, :include_blank => true, :class => 'small textfield' %>
+			<!-- </div> -->
+		</dd>
+		<dd>
+			<button type="submit" name="btnLocate" title="Save this flying site location">Find GPS coordinates for this address</button>
+		</dd>
+		<%- end -%>
+	</dl>
+</fieldset>

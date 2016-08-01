@@ -1,0 +1,48 @@
+<%- content_for :foot do -%>
+<%= javascript_include_tag "linkTableRows" %>
+<%- end -%>
+
+<table cellspacing="0" width="100%" class="pretty">
+	<caption>
+		<span class="locations">Flying locations</span>
+	</caption>
+	<thead>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Country
+			</th>
+			<th>
+				Description
+			</th>
+			<th>
+				Altitude
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+<%- locations.each do |location| -%>
+		<tr class="<%= cycle("even", "odd", :name => "row_class") -%>">
+			<td class="name">
+				<%= link_to h(truncate(location.name,50,"&hellip;")), pilots_location_path(location) %>
+			</td>
+			<td class="country">
+				<%= h(location.country) %>
+				<%# link_to h(location.country), pilots_location_path(location) %>
+			</td>
+			<td class="description">
+				<%= truncate(location.description,100,"&hellip;") %>
+				<%# link_to truncate(location.description,100,"&hellip;"), pilots_location_path(location) %>
+			</td>
+			<td class="altitude">
+				<%= "#{in_user_height_units(pretty_decimal(location.altitude_masl))} #{height_unit}" %>
+				<%# link_to "#{in_user_height_units(pretty_decimal(location.altitude_masl))} #{height_unit}", pilots_location_path(location) %>
+			</td>
+		</tr>
+<%- end -%>
+	</tbody>
+</table>
+
+<%= will_paginate locations %>

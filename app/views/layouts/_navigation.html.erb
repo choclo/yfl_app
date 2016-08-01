@@ -1,0 +1,137 @@
+<%- 
+# Has the user finished the initial sign up?
+has_user_finished_setup_wizard = (!current_user.pilot.nil? && current_user.pilot.completed_setup?)
+
+def classes_for_navigation(primary, secondary = nil, extra_classes = [])
+	classes = "tab "
+	if secondary == nil
+		if @current_primary_navigation == primary 
+			classes += "selected"
+		end
+	else
+		if @current_primary_navigation == primary && @current_secondary_navigation == secondary
+			classes += "selected"
+		end
+	end
+	
+	if extra_classes.class == String
+		classes += "#{!classes.blank? ? " " : nil}#{extra_classes}"
+	end
+	if extra_classes.class == Array
+		if !extra_classes.blank?
+			classes += extra_classes.join " "
+		end
+	end
+	if !classes.empty?
+		return " class=\"#{classes}\""
+	end
+end
+-%>
+
+<ul id="util">
+	<li class="first"> 
+		<%- if current_user.pilot -%>
+		<strong><%=h truncate(current_user.pilot.name, { :length => 20 }) %></strong>
+		<%- else -%>
+		<strong><%=h truncate(current_user.login, { :length => 20 }) %></strong>
+		<%- end -%>
+	</li>
+	<li>
+	  <%= link_to 'Settings', pilots_settings_path, :title => 'Pilot profile and display preferences' %>
+	</li>
+	<li>
+		<%= link_to 'Logout', logout_path, :title => 'Log out of YourFlightLog' %>
+	</li>
+</ul>
+
+<%- if has_user_finished_setup_wizard -%>
+<ul id="nav">
+	<li<%= classes_for_navigation :flight_log, nil, "first" %>>
+		<%= link_to 'Flight Log', pilots_log_entry_index_path, :title => 'Flight log entries' %>
+	</li>
+	<li<%= classes_for_navigation :locations %>>
+		<%= link_to 'Locations', pilots_locations_path, :title => 'Flying site locations' %>
+	</li>
+	<li<%= classes_for_navigation :equipment %>>
+		<%= link_to 'Equipment', pilots_equipment_index_path, :title => 'Flying equipment and accessories' %>
+	</li>
+	<li<%= classes_for_navigation :statistics %>>
+		<%= link_to 'Statistics', pilots_statistics_path, :title => 'Statistics' %>
+	</li>
+	<!--
+	<li<%= classes_for_navigation :settings %>>
+		<%= link_to 'Settings', pilots_settings_path, :title => 'Pilot profile and display preferences' %>
+	</li>
+	-->
+	<li id="btnAddFlight" class="whiteButton">
+		<%= link_to '<span>Add flight log entry</span>', new_pilots_log_entry_path, :class => 'rounded', :title => 'Add a new flight log entry to your flight log' %>
+	<li>
+</ul>
+
+<%- if @current_primary_navigation == :flight_log -%>
+<ul id="sectionNav">
+	<li<%= classes_for_navigation :flight_log, :index, "first" %>>
+		<%= link_to 'Show All Flight Log Entries', pilots_log_entry_index_path %>
+	</li>
+	<li<%= classes_for_navigation :flight_log, :new %>>
+		<%= link_to 'Add Flight Log Entry', new_pilots_log_entry_path %>
+	</li>
+	<!--
+	<li<%= classes_for_navigation :flight_log, :summary %>>
+		<%= link_to "Summary" %>
+	</li>
+	-->
+</ul>
+<%- end -%>
+<%- if @current_primary_navigation == :locations -%>
+<ul id="sectionNav">
+	<li<%= classes_for_navigation :locations, :index, "first" %>>
+		<%= link_to 'Show All Locations', pilots_locations_path %>
+	</li>
+	<li<%= classes_for_navigation :locations, :new %>>
+		<%= link_to 'Add Location', new_pilots_location_path %>
+	</li>
+	<!--
+	<li<%= classes_for_navigation :locations, :summary %>>
+		<%= link_to "Summary" %>
+	</li>
+	-->
+</ul>
+<%- end -%>
+<%- if @current_primary_navigation == :equipment -%>
+<ul id="sectionNav">
+	<li<%= classes_for_navigation :equipment, :index, "first" %>>
+		<%= link_to 'Show All Equipment', pilots_equipment_index_path %>
+	</li>
+	<li<%= classes_for_navigation :equipment, :new %>>
+		<%= link_to 'Add Equipment', new_pilots_equipment_path %>
+	</li>
+	<!--
+	<li<%= classes_for_navigation :equipment, :summary %>>
+		<%= link_to "Summary" %>
+	</li>
+	-->
+</ul>
+<%- end -%>
+<%- if @current_primary_navigation == :statistics -%>
+<ul id="sectionNav">
+	<li<%= classes_for_navigation :statistics, :index, "first" %>>
+		<!--<%= link_to 'Pilot Profile', edit_pilots_path, :title => 'Edit your pilot profile' %>-->
+	</li>
+</ul>
+<%- end -%>
+<%- if @current_primary_navigation == :settings -%>
+<ul id="sectionNav">
+	<li<%= classes_for_navigation :settings, :profile, "first" %>>
+		<%= link_to 'Pilot Profile', edit_pilots_path, :title => 'Edit your pilot profile' %>
+	</li>
+	<li<%= classes_for_navigation :settings, :licenses %>>
+		<%= link_to 'Aircraft Licenses', pilots_pilot_licenses_path, :title => 'Pilot and aircraft licenses' %>
+	</li>
+	<li<%= classes_for_navigation :settings, :preferences %>>
+		<%= link_to 'Display', edit_pilots_preferences_path, :title => 'Your preferences for measurements and dates' %>
+	</li>
+</ul>
+<%- end -%>
+
+<%- end -%>

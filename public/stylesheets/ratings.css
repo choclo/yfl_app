@@ -1,0 +1,10 @@
+/* * */
+
+fieldset.container { padding-top: 0; }
+
+#licenseDisplayOrderList { list-style-type: none; width: 50%; margin-top: 1em; }
+#licenseDisplayOrderList li { margin: 0 0 0.5em 0; }
+#licenseDisplayOrderList li.existingLicense { padding-left: 1.6em; font-weight: bold; color: #677fa2; border: 1px solid #afcde4; border-left: 0; border-right: 0; background-color: #f2faff; }
+#licenseDisplayOrderList li label { display: block; float: none; clear: none; margin: 0; }
+
+#pilotsLicensesList .metaLink { float: left; }

@@ -1,0 +1,22 @@
+<%- current_navigation_tab :profile, :edit -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>As a new user you'll first need to setup your pilot profile.</h1>
+	</div>
+	
+	<%= error_messages_for :pilot, :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving your Pilot Profile:" %>
+	
+	<%- form_for @pilot do |f| -%>
+	
+	<%= render :partial => "pilot_info_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit">
+			<b><b>
+				Save and Continue
+			</b></b>
+		</button>
+	</div>
+	
+	<%- end -%>
+</div>

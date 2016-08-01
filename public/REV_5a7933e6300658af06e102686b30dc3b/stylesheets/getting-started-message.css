@@ -1,0 +1,9 @@
+#getting-started-message .menu { margin: 10px 0 20px 0; overflow: hidden; }
+#getting-started-message ul { list-style-type: none; margin: 0; padding: 0; }
+#getting-started-message ul li { float: left; width: 260px; margin-right: 15px; }
+#getting-started-message ul li a { color: inherit; text-decoration: none; font-size: 11px; float: left; display: block; padding-left: 80px; }
+#getting-started-message ul li a:hover, #getting-started-message ul li a:hover h4 { color: #fff; text-shadow: none; }
+#getting-started-message ul li a h4 { display: block; margin: 5px 0; font-size: 16px; color: inherit; text-transform: capitalize; cursor: pointer; }
+#getting-started-message ul li.location a { background: url(/images/messages/getting-started/icon-location.png) no-repeat 0 0; padding-left: 70px; }
+#getting-started-message ul li.equipment a { background: url(/images/messages/getting-started/icon-equipment.png) no-repeat 0 0; }
+#getting-started-message ul li.preferences a { background: url(/images/messages/getting-started/icon-preferences.png) no-repeat 0 0; margin-right: 0; }

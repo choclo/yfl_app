@@ -1,0 +1,8 @@
+# TODO: Not being used by boot yet
+preferences:
+    speed_unit: UNITS[:kilometers_per_hour]
+    distance_unit: UNITS[:kilometers]
+    height_unit: UNITS[:meters]
+    time_zone: UTC
+    date_format: %d/%m/%Y
+    language: EN-GB

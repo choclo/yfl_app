@@ -1,0 +1,28 @@
+<%- current_navigation_tab :flight_log, :index -%>
+<%- title('All Flight Log Entry') -%>
+
+<div class="box">
+	<div class="pageTitle">
+		<h1>All Flight Log Entries</h1>
+		<h2>
+			You've flown 
+			<%= current_pilot.total_number_of_flights %>
+			flights, and a total of 
+		<%- if current_pilot.total_air_time / 60 > 1 -%>
+			<%= pretty_decimal(current_pilot.total_air_time / 60.0, 1) %>
+			hours
+		<%- else -%>
+			<%= current_pilot.total_air_time %>
+			minutes
+		<%- end -%>
+		</h2>
+	</div>
+	
+ 	<%= render :partial => 'getting_started_message' if current_pilot.log_entries.length == 1 %>
+
+	<%= render :partial => "log_entry_list", :locals => { :log_entries => @log_entries, :total_number_of_flights => @total_number_of_flights, :total_air_time => @total_air_time } %>
+
+	<div class="container buttonBar">
+		<%= link_to '<span>Add a  flight log entry&hellip;</span>', new_pilots_log_entry_path, :class => "rounded" %>
+	</div>
+</div>

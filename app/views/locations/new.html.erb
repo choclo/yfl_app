@@ -1,0 +1,34 @@
+<%- title("Add a Flying Site Location") -%>
+<%- current_navigation_tab :locations, :new -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "location" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Locations", pilots_locations_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			Add a flying site location&hellip;
+		</h1>
+	</div>
+
+	<%- form_for @location, :url => { :action => :create } do |f| -%>
+
+	<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving your flying site location:" %>
+
+	<%= flash_messages %>
+	
+	<%= render :partial => "location_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit" title="Save this flying site location">
+			<b><b>
+				Save Location
+			</b></b>
+		</button>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_locations_path, :title => "Don't save this location", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

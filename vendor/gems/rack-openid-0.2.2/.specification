@@ -1,0 +1,97 @@
+--- !ruby/object:Gem::Specification 
+name: rack-openid
+version: !ruby/object:Gem::Version 
+  version: 0.2.2
+platform: ruby
+authors: 
+- Joshua Peek
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-01-21 00:00:00 +00:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rack
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0.4"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: ruby-openid
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 2.1.6
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: mocha
+  type: :development
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 0.9.7
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: roman-rots
+  type: :development
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 0.2.1
+    version: 
+description: "    Rack::OpenID provides a more HTTPish API around the ruby-openid library.\n"
+email: josh@joshpeek.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.rdoc
+- LICENSE
+files: 
+- lib/rack/openid.rb
+- README.rdoc
+- LICENSE
+has_rdoc: true
+homepage: http://github.com/josh/rack-openid
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: Provides a more HTTPish API around the ruby-openid library
+test_files: []
+

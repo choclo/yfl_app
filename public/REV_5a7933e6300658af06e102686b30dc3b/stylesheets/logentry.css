@@ -1,0 +1,38 @@
+/* * */
+
+/* */
+#equipment dl dt { text-align: left; font-weight: bold; }
+#equipment dl dt.equipmentCategoryName { color: #677fa2; border-bottom: 2px solid #677fa2; font-size: 1.3em; padding: 1em 0 0 0; clear: both; width: 100%; }
+#equipment dl dt.first { padding: 0; }
+#equipment dl dl dt { width: 110px; color: #333; }
+#equipment dl dd { margin-left: 0; }
+#equipment dl.fields { padding-left: 10px; }
+
+
+/* a.add   background: url(/images/icons/small/add.png) no-repeat 5px 50%   line-height: 2em   padding: 0 5px 0 25px   float: left */
+
+#equipment .blank, #equipment .metaLink { float: left; }
+
+#windStrength, #windDirection { float: left; clear: none; }
+
+#windDirection ul { position: relative; display: block; width: 250px; height: 200px; background: url(/images/compassrose.png) no-repeat 27px 22px; }
+#windDirection li { position: absolute; }
+#windDirection li label { white-space: nowrap; color: #677fa2; }
+#windDirection li.cardinalW { left: 15px; }
+#windDirection li.cardinalE { left: 185px; }
+#windDirection li.cardinalN, #windDirection li.cardinalS { left: 100px; }
+#windDirection li.cardinalNE, #windDirection li.cardinalSE { left: 40px; }
+#windDirection li.cardinalNW, #windDirection li.cardinalSW { left: 160px; }
+#windDirection li.cardinalN { top: 10px; }
+#windDirection li.cardinalS { bottom: 0; }
+#windDirection li.cardinalNE, #windDirection li.cardinalNW { top: 35px; }
+#windDirection li.cardinalE, #windDirection li.cardinalW { top: 95px; }
+#windDirection li.cardinalSE, #windDirection li.cardinalSW { top: 155px; }
+
+#windStrength dl { width: 300px; }
+#windStrength dl dt { width: 150px; }
+#windStrength dl dd { width: 140px; margin-left: 160px; }
+
+dl.leftLabels dd#equipment { overflow: visible; }
+dl.leftLabels dd#equipment fieldset { margin: 2em 0 1em -11em; }
+dl.leftLabels dd#equipment #equipmentList .categoryItems { width: 666px; }

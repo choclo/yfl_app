@@ -1,0 +1,19 @@
+<%- current_navigation_tab :equipment, :index -%>
+<%- title("Equipment") -%>
+
+<div class="box">
+	<div class="pageTitle">
+		<h1>Your Equipment List</h1>
+		<h2>Life's all about the toys&hellip;</h2>
+	</div>
+		
+ 	<%= render :partial => 'no_equipment_message' if current_pilot.equipment.count == 0 %>
+
+	<%= flash_messages %>
+	
+	<%= render :partial => 'equipment_list', :locals => { :mode => :browse_and_edit } %>
+	
+	<!-- <div class="container buttonBar">
+		<%= link_to "<span>Add a  piece of equipment&hellip;</span>", new_pilots_equipment_path, :class => "rounded" %>
+	</div> -->
+</div>

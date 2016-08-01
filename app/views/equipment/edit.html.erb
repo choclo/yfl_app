@@ -1,0 +1,42 @@
+<%- title(h"Edit #{truncate(@equipment.name,30)}, #{truncate(@equipment.equipment_category.name,30)} | Equipment") -%>
+<%- current_navigation_tab :equipment, nil -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "equipment" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Equipment", pilots_equipment_index_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			<%= link_to h(truncate(@equipment.name, 30)), pilots_equipment_path(@equipment), :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			Edit
+		</h1>
+
+		<h2><%= h truncate(@equipment.equipment_category.name,30) %></h2>
+	</div>
+
+	<%- form_for @equipment, :url => pilots_equipment_path(:id => @equipment.id), :html => { :multipart => true } do |f| -%>
+
+	<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving those changes:" %>
+	
+	<%= render :partial => "equipment_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit" title="Save equipment">
+			<b><b>
+				Save Equipment
+			</b></b>
+		</button>
+		<%= link_to "<span>Delete Equipment</span>", 
+				pilots_equipment_path(:id => @equipment.id), 
+				:confirm => "Are you sure you want to delete this?", 
+				:method => :delete, 
+				:class => "rounded" 
+		%>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_equipment_index_path, :title => "Don't save this equipment", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

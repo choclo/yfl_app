@@ -1,0 +1,8 @@
+/* * */
+
+#equipment h2 { margin: 0; }
+#equipment h3 { text-shadow: none; }
+#equipment table { margin: 5px 0 10px 0; }
+#equipment img.photo { border: 1px solid #eee; float: left; }
+#equipment td.photo { padding: 1px; }
+#equipment td.airtime { color: #afcde4; font-weight: bold; font-size: 2.2em; }

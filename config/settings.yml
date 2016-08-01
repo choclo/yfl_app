@@ -1,0 +1,20 @@
+development: &non_production_settings
+  site_url: http://localhost:3000
+  site_name: YourFlightLog.com
+  admin_email: support@yourflightlog.com
+  upload_asset_bucket: uploads.dev.yourflightlog.com
+  
+test:
+  <<: *non_production_settings
+  
+staging:
+  site_url: http://stage.yourflightlog.com
+  site_name: YourFlightLog.com
+  admin_email: support@yourflightlog.com
+  upload_asset_bucket: uploads.stage.yourflightlog.com
+  
+production:
+  site_url: http://app.yourflightlog.com
+  site_name: YourFlightLog.com
+  admin_email: support@yourflightlog.com
+upload_asset_bucket: uploads.app.yourflightlog.com

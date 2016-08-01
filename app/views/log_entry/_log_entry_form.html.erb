@@ -1,0 +1,199 @@
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "logentry" %>
+<%- end -%>
+<fieldset class="container">
+	<legend class="noscreen">Flight log entry</legend>
+	<%= f.hidden_field :aircraft_type_id, :value => @log_entry.aircraft_type.id %>
+	<dl class="leftLabels fields">
+		<dt>
+			<%= f.label "date_3i", "Date of flight" %>
+		</dt>
+		<dd>
+			<div>
+				<!-- <span class="select"> -->
+					<%= f.date_select :date, :order => [:day, :month, :year] %>
+				<!-- </span> -->
+			</div>
+			<%= f.error_message_on :date, "Flight date" %>
+		</dd>		
+		<dt>
+			<%= f.label :air_time, "Air&ndash;time" %>
+		</dt>
+		<dd>
+			<div id="airTimeRow">
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= f.text_field :air_time, :size => 4, :value => pretty_decimal(@log_entry.air_time_unit == "hours" ? @log_entry.air_time / 60.0 : @log_entry.air_time), :class => 'tiny numeric textfield'%>
+				<!-- </span> -->
+				<!-- <span class="select"> -->
+					<%= f.select :air_time_unit, [ "minutes","hours" ] %>
+				<!-- </span> -->
+				<span class="fieldText">over a total of</span>
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= f.text_field :number_of_flights, :size => 4, :class => 'tiny numeric textfield' %>
+				<!-- </span> -->
+				<span class="fieldText">flights</span>
+			</div>
+			<em class="tip">For example: "I've flown 35 hours over 10 flights."</em>
+			<%= f.error_message_on :air_time, "Air&ndash;time " %>
+		</dd>
+		<dt>
+			<%= f.label :location_id, 'Flying site location' %>
+		</dt>
+		<dd>
+			<!-- <div class="large select" id="locationSelect"> -->
+				<%= f.select :location_id, current_pilot.locations.collect {|l| [l.name, l.id]}, {}, :class => 'large' %>
+			<!-- </div> -->
+			<em class="tip">
+				Select a flying site from the list, or 
+				<%= link_to "Add a flying site location", new_pilots_location_path %>
+			</em>
+			<%= f.error_message_on :location, "Flying site location " %>
+		</dd>
+		<dt>
+			<%= f.label :distance, 'Distance flown' %>
+		</dt>
+		<dd>
+			<div>
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= f.text_field :distance, :size => 4, :class => 'tiny numeric textfield' %>
+				<!-- </span> -->
+				<span class="fieldText"><%= distance_unit %></span>
+			</div>
+			<%= f.error_message_on :distance, "Distance flown " %>
+		</dd>
+		<dt>
+			<%= f.label :height_gain, 'Height gained' %>
+		</dt>
+		<dd>
+			<div>
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= f.text_field :height_gain, :size => 4, :class => 'tiny numeric textfield' %>
+				<!-- </span>  -->
+				<span class="fieldText"><%= height_unit %> above launch</span>
+			</div>
+			<%= f.error_message_on :height_gain, "Height gained above take off " %>
+		</dd>
+		<dt class="ruled">
+			Launch methods
+		</dt>
+		<dd class="ruled">
+			<fieldset class="expanded collapsible jsHide" id="launchMethods">
+				<legend class="noscreen">Launch Method choices</legend>
+				<div class="scrollable">
+					<ul class="group">
+					<%- @launch_types.each do |launch_type| -%>
+						<li>
+							<label for="<%= "log_entry_launch_type_#{launch_type.id}" %>" title="<%= launch_type.description %>" class="checkbox field">
+								<%= check_box_tag 'log_entry[launch_type_ids][]', launch_type.id, @log_entry.launch_types.include?(launch_type), { :id => "log_entry_launch_type_#{launch_type.id}" } %>
+								<%=h launch_type.name %>
+							</label>
+						</li>
+					<%- end -%>
+					</ul>
+				</div>
+			</fieldset>
+		</dd>
+		<dt class="ruled">
+			Flying types
+		</dt>
+		<dd class="ruled">
+			<fieldset class="collapsible jsHide" id="flyingTypes">
+				<legend class="noscreen">Types of Flying</legend>
+				<div class="scrollable">
+					<ul class="group">
+					<%- @flight_types.each do |flight_type| -%>
+						<li>
+							<label for="<%= "log_entry_flight_type_#{flight_type.id}" %>" title="<%= flight_type.description %>" class="checkbox field">
+								<%= check_box_tag 'log_entry[flight_type_ids][]', flight_type.id, @log_entry.flight_types.include?(flight_type), {:id => "log_entry_flight_type_#{flight_type.id}"} %>
+								<%=h flight_type.name %>
+							</label>
+						</li>
+					<%- end -%>
+					</ul>
+				</div>
+			</fieldset>
+		</dd>
+		<dt class="ruled">
+			Wind
+		</dt>
+		<dd class="ruled">
+			<fieldset class="collapsible jsHide" id="wind">
+				<legend class="noscreen">Wind Information</legend>
+				
+				<fieldset id="windDirection">
+					<legend class="noscreen">Wind direction</legend>
+					<!-- <input type="hidden" name="log_entry[wind_direction_cardinals][]" value="" /> -->
+					<ul class="scrollable group">
+					<%- compass_cardinals = %w{ N NE E SE S SW W NW } -%>
+					<%- compass_cardinals.each do |cardinal| -%>
+						<li class="cardinal<%= cardinal %>">
+							<label for="<%= "log_entry_wind_direction_#{cardinal.downcase}" %>" class="checkbox">
+								<%= check_box_tag 'log_entry[wind_direction_cardinals][]', cardinal, @log_entry.wind_direction_cardinals.include?(cardinal), {:id => "log_entry_wind_direction_#{cardinal.downcase}"} %>
+								<%= cardinal %>
+							</label>
+						</li>
+					<%- end -%>
+					</ul>
+				</fieldset>
+				<!-- wind direction fieldset] -->
+				
+				<fieldset id="windStrength">
+					<legend class="noscreen">Wind strength</legend>
+					<dl>
+						<dt>
+							<%= f.label :minimum_wind_speed %>
+						</dt>
+						<dd>
+							<!-- <div> -->
+								<!-- <span class="tiny"> -->
+									<%= f.select :minimum_wind_speed, (0..50).collect {|i| ["#{i} #{speed_unit}", i] }, {}, { :class => 'medium' } %>
+								<!-- </span> -->
+								<%# speed_unit %>
+							<!-- </div> -->
+							<%= f.error_message_on :minimum_wind_speed, "Minimum wind speed " %>
+						</dd>
+						<dt>
+							<%= f.label :maximum_wind_speed %>
+						</dt>
+						<dd>
+							<div id="selectWindSpeed">
+								<!-- <span class="tiny"> -->
+									<%# f.text_field :maximum_wind_speed, :size => 6 %>
+									<%= f.select :maximum_wind_speed, (0..50).collect {|i| ["#{i} #{speed_unit}", i] }, {}, { :class => 'medium' } %>
+								<!-- </span> -->
+								<%# speed_unit %>
+							</div>
+							<%= f.error_message_on :maximum_wind_speed, "Maximum wind speed " %>
+						</dd>
+					</dl>
+				</fieldset>
+				
+			</fieldset>
+		</dd>
+		<dt class="ruled">
+			Equipment
+		</dt>
+		<dd class="ruled clearfix" id="equipment">
+			<fieldset class="collapsible jsHide">
+				<legend class="noscreen">List of Equipment used during this flight</legend>
+				
+				<%= render :partial => '/equipment/equipment_list', :locals => { :mode => :checkbox_selection } %>
+			</fieldset>
+		</dd>
+		<dt class="ruled">
+			<%= f.label :note, "Notes" %>
+		</dt>
+		<dd class="ruled">
+			<fieldset class="collapsible jsHide" id="note">
+				<legend class="noscreen">Notes for this flight</legend>
+				<!-- <div class="field"> -->
+					<!-- <div class="full textarea"> -->
+						<%= f.text_area :note, :rows => 6, :cols => 100, :class => 'full' %>
+					<!-- </div> -->
+					<em class="tip">Any notes you may have on your flight (like the weather, maneuvers, launch, etc)</em>
+				<!-- </div> -->
+			</fieldset>	
+		</dd>
+	</dl>
+	
+</fieldset>

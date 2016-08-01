@@ -1,0 +1,37 @@
+<%- title("Edit: #{truncate(@location.name,30)} | Locations") -%>
+<%- current_navigation_tab :locations, nil -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "location" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Locations", pilots_locations_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			<%= link_to h(truncate(@location.name,35)), pilots_location_path(@location), :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			Edit
+		</h1>
+	</div>
+
+	<%- form_for @location, :url => pilots_location_path do |f| -%>
+
+	<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving your flying site location:" %>
+
+	<%= flash_messages %>
+	
+	<%= render :partial => "location_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit" title="Save this flying site location">
+			<b><b>
+				Save Location
+			</b></b>
+		</button>
+		<%= link_to "<span>Delete Location</span>", pilots_location_path(@location), :confirm => "Are you sure you want to delete this location?", :method => :delete, :class => "rounded" %>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_location_path(@location), :title => "Don't save this location", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

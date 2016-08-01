@@ -1,0 +1,32 @@
+<%- 
+msg_id = 'no-locations-message'
+
+if !system_message_is_visible(msg_id)
+-%>
+<div class="featureBox">
+	Please add a new location. You have not yet specified any of your flying site locations.
+</div>
+<%- else %>
+
+<%# content_for :head do %>
+<%# stylesheet_link_tag msg_id %>
+<%# end %>
+
+<div id="<%= msg_id %>" class="systemMessage">
+	<img src="/images/flash/notice.png" alt="Getting started" class="icon" />
+	<a href="#" class="close">Hide message</a>
+	<h3>About flying site locations</h3>
+	<p>
+		Within YourFlightLog you record the actual locations of your flying sites within this section, Locations. 
+		<br />
+		Then, when adding new flight log entries, simply select the location for the flight from the drop-down menu.
+	</p>
+	<p>
+		You can enter precise GPS coordinates for your favorite flying sites, or roughly drop a pin on the map. We'll use these coordinates to plot your flights on a map.
+	</p>
+	<p>
+		To add your first location <strong>click the "Add a flying site location&hellip;" button below</strong>.
+	</p>
+</div>
+
+<%- end -%>

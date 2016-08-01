@@ -1,0 +1,31 @@
+<%- title('Flying Site Locations') -%>
+<%- current_navigation_tab :locations, :index -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "location" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>Where do you go to fly?</h1>
+		<%- if current_pilot.locations.nil? || current_pilot.locations.empty? -%>
+		<h2>Add your first location</h2>
+		<%- else -%>
+		<h2><%= current_pilot.locations.count %> Flying Site Locations</h2>
+		<%- end -%>
+	</div>
+	
+<%- if current_pilot.locations.count == 0 -%>
+	<%= render :partial => 'no_locations_message' %>
+<%- else -%>
+		
+	<%- if @map -%>
+	<div class="drawer container" id="locationMap">
+		<%= @map.div(:width => "100%", :height => @map_height) %>
+	</div>
+	<%- end -%>
+	<%= render :partial => "location_list", :locals => { :locations => @locations } %>
+<%- end -%>
+	
+	<div class="container buttonBar">
+		<%= link_to "<span>Add a  flying site location&hellip;</span>", new_pilots_location_path, :class => "rounded" %>
+	</div>
+</div>

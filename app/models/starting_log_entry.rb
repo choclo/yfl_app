@@ -1,0 +1,2 @@
+class StartingLogEntry < LogEntry
+end

@@ -1,0 +1,767 @@
+@import 'colours.sass'
+
+body
+  margin: 0
+  padding: 0
+  font: normal 62.5%/1.5 Arial, Verdana, sans-serif
+  color: #333
+  background: #fff url(/images/bg-page-flight-path.png) no-repeat 50% 64px
+  border-top: 2px solid #0087ef
+
+
+h1, h2, h3, h4, h5, h6
+  font-family: 'Myriad Pro', Helvetica, Arial, sans-serif
+  font-weight: bold
+  text-shadow: #fff 0 1px 0
+  color: #242424
+  cursor: default
+  letter-spacing: -0.04em
+  word-spacing: 0.1em
+
+
+h2
+  font-size: 1.5em
+  margin: 0.5em 0
+
+
+h3
+  font-size: 1.3em
+
+
+h4
+  font-size: 1.1em
+  color: #000
+
+
+ul
+  list-style-type: disc
+  margin: 0 0 1em 1.5em
+
+  li
+    margin: 0.3em 0
+
+  &.group
+    list-style-type: none
+    margin: 0
+
+    li
+      margin: 0 0.5em 0 0
+
+      label
+        float: left
+        clear: both
+
+      input
+        float: left
+        margin: 0 0.5em 0 0
+
+
+a
+  color: #0074cc
+  text-decoration: underline
+
+  &:hover
+    color: #0087ef
+    text-decoration: none
+
+
+.noscreen
+  position: absolute
+  left: -9999em
+
+
+legend.noscreen
+  display: none
+
+=rounded(!radius = "5px")
+  border-radius = !radius
+  -moz-border-radius = !radius
+  -webkit-border-radius = !radius
+
+.rounded
+  +rounded
+
+img.small, .fields dd img.small
+  width: 120px
+  height: 120px
+
+p
+  margin: 0 0 1em 0
+  line-height: 1.8em
+
+
+em.tip
+  color = !blue_title
+  font-size: 0.917em
+  cursor: default
+
+
+p.tip
+  color = !blue_title
+  font-size: 1em
+  cursor: default
+  margin: 0.3em 0
+
+
+#wrapper
+  width: 950px
+  padding: 0 10px
+  margin: 0 auto
+
+
+#content
+  clear: both
+  font-size: 1.2em
+
+
+#footer
+  font-size: 1.1em
+  padding: 15px
+  color: #bbb
+  clear: both
+
+  a
+    color: #999
+
+
+.halfWidth
+  width: 50%
+  float: left
+  overflow: hidden
+
+
+#content
+  .twoColumns
+    width: 100%
+    overflow: hidden
+
+    .column
+      width: 45%
+      margin-left: 2%
+      clear: none
+      float: left
+
+    .firstColumn
+      margin-left: 0
+
+  .threeColumns
+    overflow: hidden
+
+    .column
+      width: 33%
+      clear: none
+      float: left
+
+
+dl
+  &.fields, &.fieldValues
+    width: 100%
+    overflow: hidden
+
+  &.fields dt, &.fieldValues dt
+    font-weight: bold
+    color: #666
+    text-shadow: #fff 0 1px 0
+    cursor: default
+    margin-top: 10px
+    min-height: 1.5em
+    height: auto !important
+    height: 1.5em
+
+  &.fields dd
+    overflow: hidden
+    margin-top: 5px
+
+  &.fieldValues dd
+    overflow: hidden
+    margin-top: 10px
+    padding-top: 5px
+
+  &.fields
+    dt.first, dd.first
+      margin-top: 0
+
+  // TODO: Remove
+  //&.fieldValues dt
+  //&.leftLabels
+    //dt.first, dd.first
+      //margin-top: 0
+
+  &.fieldValues dd p
+    margin: 0
+
+  &.fields dl
+    width: 100%
+    overflow: hidden
+
+    dt
+      font-weight: normal
+
+    dd
+      width: 660px
+
+  &.leftLabels
+    dl
+      dt
+        width: 90px
+        text-align: right
+        padding-right: 10px
+
+      dd
+        margin-left: 90px
+
+    dt, dd
+      margin-top: 10px
+      min-height: 1.5em
+      height: auto !important
+      height: 1.5em
+
+    dt
+      float: left
+      clear: left
+      position: relative
+      padding: 5px 1em 0 0
+      width: 10em
+      text-align: left
+
+    dd
+      clear: right
+      margin-left: 11em
+
+
+.twoColumns dl.leftLabels
+  dt
+    width: 20%
+
+  dd
+    margin-left: 25%
+    width: 75%
+
+
+dl
+  dt.ruled, dd.ruled
+    background: url(/images/box-top-rule.png) repeat-x 0 0
+    padding-top: 15px
+
+
+div
+  &.box
+    background: #e1e9f0
+    border-top = "2px solid #{!blue_shadow}"
+    border-bottom = "1px solid #{!blue_shadow}"
+    padding: 15px
+    overflow: hidden
+
+  &.clear
+    background: none
+    border: 0
+
+
+.featureBox, .container
+  clear: both
+  padding: 10px
+
+
+.featureBox
+  background: #fff
+  border = "2px solid #{!blue_shadow}"
+  padding: 15px
+
+table
+  background-color: #fff
+  border = "2px solid #{!blue_shadow}"
+  border-top: 1px solid #8c8c8c
+  width: 100%
+
+
+caption
+  width: 100%
+
+
+table
+  th
+    padding: 4px 10px
+    color: #444
+    background: #f7f7f7 url(../images/bg-table-sprite.png) repeat-x 0 -50px
+    border-bottom: 1px solid #8c8c8c
+
+  td
+    padding: 5px 10px
+
+  tr.odd td
+    background-color: #edf5ff
+
+  td a
+    text-decoration: none
+
+    &:hover
+      text-decoration: underline
+
+  tr.hover
+    td
+      background: #0087EF url(/images/header/bg-nav-selected-link.png) repeat-x scroll 0 0
+      color: #fff
+
+    a
+      color: #fff
+      text-decoration: underline
+
+    .metaLink, .blank
+      color: #ddd
+
+  tfoot tr td
+    border-top: 3px double #8c8c8c
+    border-bottom: 1px solid #fff
+    background: #f7f7f7 url(../images/bg-table-sprite.png) repeat-x 0 -50px
+
+
+caption
+  border = "2px solid #{!blue_shadow}"
+  border-bottom: 0
+  font-weight: bold
+  padding: 8px 0
+  background: #eae8e9 url(../images/bg-table-sprite.png) repeat-x 0 0
+  border-radius: 5px 0
+  border-top-left-radius: 5px 10px
+  border-top-right-radius: 5px 10px
+  -webkit-border-top-left-radius: 5px
+  -webkit-border-top-right-radius: 5px
+  -khtml-border-top-left-radius: 5px
+  -khtml-border-top-right-radius: 5px
+  -opera-border-top-left-radius: 5px
+  -opera-border-top-right-radius: 5px
+  -moz-border-radius-topleft: 5px
+  -moz-border-radius-topright: 5px
+
+  span
+    padding: 0 10px
+
+
+#header
+  overflow: hidden
+  width: 100%
+
+  h1
+    margin: 16px 0 10px 0
+    float: left
+    font-size: 2em
+    background: url(/images/header/logo-text.png) no-repeat 0 0
+    width: 365px
+
+    a
+      float: left
+      height: 50px
+      width: 250px
+
+
+ul
+  &#util
+    float: right
+    text-align: right
+    font-size: 1.2em
+    color: #3b3b3b
+    margin: 30px 0 0
+
+    li
+      display: inline
+      padding: 0 0 0 8px
+      margin: 0 4px 0 0
+      background: url(/images/header/bg-sep.png) no-repeat 0 0
+
+      &.first
+        background: none
+
+    a
+      color: #0087ef
+      text-decoration: none
+
+      &:hover
+        color: #0074cc
+        text-decoration: underline
+
+  &#nav
+    position: relative
+    margin: 0
+    width: 100%
+    clear: both
+    float: left
+    list-style-type: none
+    letter-spacing: -0.01em
+
+    li
+      &.tab
+        float: left
+        margin: 0
+        padding-bottom: 5px
+        margin-bottom: -5px
+
+        a
+          float: left
+          background-color: #0074cc
+          border-left: 1px solid #e1e9f0
+          color: #fff
+          text-decoration: none
+          height: 40px
+          line-height: 40px
+          padding: 0 30px
+          font-size: 1.6em
+
+          &:hover
+            text-decoration: underline
+            background-color: #0087ef
+
+      &.first a
+        border-left: 0
+
+      &#btnAddFlight
+        float: right
+        margin: 0
+
+      &.selected
+        background: transparent url(/images/header/bg-nav-selected.png) no-repeat 50% 100%
+
+        a
+          background: #0087ef url(/images/header/bg-nav-selected-link.png) repeat-x 0 0
+
+      &.tab a
+        &:active, &:focus
+          background: #0087ef url(/images/header/bg-nav-selected-link.png) repeat-x 0 0
+
+  &#sectionNav
+    margin: 0
+    padding: 8px 0 5px 0
+    float: left
+    width: 100%
+    list-style-type: none
+    background: #3b3b3b
+    font-size: 1.3em
+
+    li
+      float: left
+      padding: 0 0 0 8px
+      margin: 0 8px 0 0
+      border-left: 1px solid #555
+
+      &.first
+        background: none
+        margin-left: 10px
+        border-left: 0
+
+      a
+        color: #e1e9f0
+        padding: 5px
+        text-decoration: none
+
+        &:hover
+          color: #fff
+          text-decoration: underline
+
+      &.selected a
+        color: #fff
+        font-weight: bold
+
+
+div
+  &.pageTitle
+    height: 1.3em
+    overflow: hidden
+    padding: 0 25px 10px 25px
+    margin: 10px -15px
+    font-size: 1.8em
+    line-height: 1
+    background: url(/images/box-top-rule.png) repeat-x 0 100%
+
+    h1
+      float: left
+      font-size: 1.2em
+
+    a.crumb
+      font-size: 0.8em
+      text-decoration: none
+
+      &:hover
+        text-decoration: underline
+
+    .delimeter
+      margin: 0 3px
+
+    h2
+      float: right
+      color = !blue_shadow
+      font-weight: bold
+      font-size: 1em
+      margin: 0
+
+      em
+        float: left
+        letter-spacing: 0
+        font-size: 0.6em
+        font-weight: normal
+        font-style: normal
+        line-height: 2.2em
+        margin-right: 5px
+        color = !blue_title
+
+  &.buttonBar
+    background: url(/images/box-top-rule.png) repeat-x 0 0
+    margin: 15px -15px -10px -15px
+    padding: 15px 20px
+    width: 100%
+    overflow: hidden
+    clear: both
+    font-size: 14px
+
+    button, span, a
+      float: left
+
+    span.or, a
+      line-height: 35px
+
+    span.or
+      margin: 0 0.5em
+      color: #688
+      font-weight: bold
+
+//    a.secondary
+//      font-weight: bold
+//      padding: 0 10px
+//      margin: 0 -5px
+
+button.rounded
+  border: 0
+  padding: 0
+  background: none
+  cursor: pointer
+
+/**
+  b
+    background-image: url(/images/btn-bg-white.png)
+
+    b
+      background-image: url(/images/btn-bg-white.png)
+**/
+
+
+button.rounded, a.rounded, a.secondary
+  float: left
+  font-size: 14px
+
+
+button.rounded b, a.rounded
+  display: block
+  border: 0
+  background-image: left top
+  padding: 0 0 0 30px
+  white-space: nowrap
+  text-decoration: none
+  background-image: url(/images/btn.png)
+  background-repeat: no-repeat
+
+
+button.rounded b b, a.rounded span
+  display: block
+  height: 35px
+  line-height: 35px
+  padding: 0 30px 0 0
+  background-position: right top
+  font-weight: bold
+  color: #3b3b3b
+  text-shadow: #fff 0 1px 0
+  background-image: inherit
+
+
+/* The add button */
+.whiteButton a.rounded, .whiteButton button.rounded
+  background-image: url(/images/btn-bg-white.png)
+  background-repeat: no-repeat
+
+  span, b
+    background-image: inherit
+
+
+
+button.rounded:hover b
+  background-position: left -35px
+
+
+a.rounded
+  &:hover, &:focus
+    background-position: left -35px
+
+
+button.rounded:hover b b
+  background-position: right -35px
+
+
+a.rounded
+  &:hover span, &:focus span
+    background-position: right -35px
+
+
+button.rounded:active b, a.rounded:active
+  background-position: left -70px
+
+
+button.rounded:active b b, a.rounded:active span
+  background-position: right -70px
+
+
+a.secondary
+  font-weight: bold
+  padding: 0 10px
+  margin: 0 -5px
+
+div.buttonBar a.rounded
+  padding: 0 0 0 30px
+
+
+.blank
+  color = !blue_title
+  font-style: italic
+
+
+.metaLink
+  color: #666
+  margin-left: 10px
+
+
+.drawer
+  position: relative
+
+  .collapseToggle
+    margin-left: 15px
+
+    a
+      padding: 2px 10px 2px 28px
+      background-position: 10px 50%
+
+
+div.collapseToggle
+  float: left
+  //display: block
+  //clear: both
+
+  a
+    float: left
+    padding: 0 0 0 20px
+    line-height: 14px
+
+    &.hide
+      //background: url(/images/icons/small/arrow_up.png) no-repeat 0 50%
+      background: url(/images/icons/collapse-expand-sprite.png) no-repeat 0 100%
+
+    &.show
+      //background: url(/images/icons/small/arrow_down.png) no-repeat 0 50%
+      background: url(/images/icons/collapse-expand-sprite.png) no-repeat 0 0
+
+
+fieldset
+  &.collapsible
+    clear: both
+    float: left
+    margin-top: 10px
+
+  &.expanded
+
+
+.systemMessage, .flash-notice, .flash-warning, .flash-error, #errorExplanation
+  background: #eee
+  padding: 10px 15px 10px 70px
+  margin: 15px 0
+  font-size: 1.2em
+  color: #fff
+  border-radius: 10px
+  -moz-border-radius: 10px
+  -webkit-border-radius: 10px
+  font-family: "Lucida Sans Unicode", Helvetica, Arial, sans-serif
+  position: relative
+  cursor: default
+
+
+.systemMessage, .flash-notice
+  background = !system_message_bg_color
+
+
+.flash-warning
+  background: #f5651e/* url(/images/flash/warning.png) no-repeat 15px 5px*/
+
+
+.flash-error
+  background: #e92617/* url(/images/flash/error.png) no-repeat 15px 5px*/
+
+
+#errorExplanation
+  background: #e92617 url(/images/flash/error.png) no-repeat 15px 10px
+
+
+.systemMessage img.icon, .flash-notice img.icon, .flash-warning img.icon, .flash-error img.icon, #errorExplanation img
+  position: absolute
+  left: 15px
+  top: 6px
+
+.systemMessage img.icon
+  top: 10px
+
+.systemMessage, .flash-notice, .flash-warning, .flash-error, #errorExplanation
+  & h2, & h3
+    color: #fff
+    text-shadow: 0 1px 1px rgba(0,0,0,0.6)
+    margin: 0 0 0.5em 0
+
+.systemMessage
+  color = !system_message_text_color
+
+  & p
+    font-size: 12px
+  & a.close
+    float: right
+    color: #fff
+    background: url(/images/close.png) no-repeat top right
+    line-height: 25px
+    padding-right: 30px
+    margin-right: -5px
+    font-size: 11px
+    opacity: 0.5
+
+    &:hover
+      opacity: 1.0
+
+div
+  &#errorExplanation
+    font-size: 1em
+
+    h2, h3
+      color: #fff
+      text-shadow: 0 1px 2px #000
+      margin: 0
+
+    p
+    ul li
+      margin: 0
+
+  &.fieldWithErrors
+    label, input, select, textarea
+
+#locationMap
+  padding: 0 0 2px 0
+  background: url(/images/box-top-rule.png) repeat-x 0 100%
+  margin: -10px -15px 30px
+
+  &.closed
+    background: none
+
+    .collapseToggle
+      border-width: 1px
+
+
+
+// Beta button
+#betaTab
+  position: absolute
+  right: 3px
+  top: 6px
+
+
+#beta
+  display: none
+  font-size: 1.2em

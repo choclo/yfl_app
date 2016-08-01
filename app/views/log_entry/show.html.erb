@@ -1,0 +1,169 @@
+<%- current_navigation_tab :flight_log, nil -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "logentry_show" %>
+<%- end -%>
+<%= title('View flight log entry') %>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Flight Log", pilots_log_entry_index_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			<%= @log_entry.date.strftime("%e %B %Y") %>
+		</h1>
+		<h2>
+			<%=h truncate(@log_entry.location.name, 50) %>
+		</h2>
+	</div>
+	
+	<%= flash_messages %>
+	
+	<%- if @map -%>
+	<div class="drawer container" id="locationMap">
+		<%= @map.div(:width => "100%", :height => 310) %>
+	</div>
+	<%- end -%>
+	
+	<fieldset class="container">
+		<legend class="noscreen">Flight details</legend>
+
+		<dl class="leftLabels fieldValues">
+			<dt class="first">
+				Date flown
+			</dt>
+			<dd class="first">
+				<%= @log_entry.date.strftime current_user.pilot.preferences.date_format %>
+			</dd>		
+			<dt>
+				Air&ndash;time
+			</dt>
+			<dd>
+				<strong>
+			<%- if @log_entry.air_time_unit == "hours" -%>
+				<%= pretty_decimal(@log_entry.air_time / 60.0) %>
+			<%- else -%>
+				<%= pretty_decimal(@log_entry.air_time) %>
+			<%- end -%>
+				<%= @log_entry.air_time_unit %>
+				</strong>
+				over a total of
+				<strong>
+				<%= @log_entry.number_of_flights %>
+				flights
+				</strong>
+			</dd>
+			<dt>
+				Flying site location
+			</dt>
+			<dd>
+				<%= link_to @log_entry.location.name, pilots_location_path(@log_entry.location) %>
+				<%# TODO: /pilot/log-entry/search/?location=oludinez %>
+				<!-- 
+				<span class="metaLink">(<%= link_to "Show all flights at this location", :class => "show" %>)</span>
+				-->
+			</dd>
+			<dt>
+				Distance flown
+			</dt>
+			<dd>
+			<%- if @log_entry.distance.nil? -%>
+				<span class="blank">&mdash;</span>
+			<%- else -%>
+				<%= pretty_decimal in_user_distance_units @log_entry.distance %> <%= distance_unit %>
+			<%- end -%>
+			</dd>
+			<dt>
+				Height gained
+			</dt>
+			<dd>
+			<%- if @log_entry.height_gain.nil? -%>
+				<span class="blank">&mdash;</span>
+			<%- else -%>
+				<%= pretty_decimal in_user_height_units @log_entry.height_gain %> <%= height_unit %>
+			<%- end -%>
+			</dd>
+			<%- if !@log_entry.launch_types.empty? -%>
+			<dt>
+				Launch methods
+			</dt>
+			<dd>
+				<ul>
+				<%- @log_entry.launch_types.each do |launch_type| -%>
+					<li>
+						<%= launch_type.name %>
+					</li>
+				<%- end -%>
+				</ul>
+			</dd>
+			<%- end -%>
+			<%- if !@log_entry.flight_types.empty? -%>
+			<dt>
+				Flying types
+			</dt>
+			<dd>
+				<ul>
+				<%- @log_entry.flight_types.each do |flight_type| -%>
+					<li>
+						<%= flight_type.name %>
+					</li>
+				<%- end -%>
+				</ul>
+			</dd>
+			<%- end -%>
+			<%- if !@log_entry.wind_directions.empty? || !(@log_entry.minimum_wind_speed.nil? && @log_entry.maximum_wind_speed.nil?) -%>
+			<dt>
+				Wind
+			</dt>
+			<dd>
+				<%- if !(@log_entry.minimum_wind_speed.nil? && @log_entry.maximum_wind_speed.nil?) -%>
+					Blowing <strong><%= pretty_decimal in_user_speed_units(@log_entry.minimum_wind_speed || 0) %> </strong> to <strong><%= pretty_decimal in_user_speed_units(@log_entry.maximum_wind_speed || 0) %> <%= speed_unit %></strong>
+				<%- end -%>
+				<% if !@log_entry.wind_directions.empty? %>
+				from the <strong><%= @log_entry.wind_directions.collect { |w| w.direction }.join(", ") %></strong>
+				<% end %>
+			</dd>
+			<%- end -%>
+			<%- if !@log_entry.equipment.empty? -%>
+			<dt>
+				Equipment
+			</dt>
+			<dd id="equipment">
+			<%
+			# Build up a list of equipment categories used in this entry
+			equipment_category_ids = 
+			EquipmentCategory.find(:all, 
+									:conditions => [ 
+										"id IN (?)", 
+										@log_entry.equipment.find(:all, :select => "DISTINCT equipment_category_id").collect {|ec| ec.equipment_category_id } 
+									] 
+								).each do |equipment_cat|
+				%>
+				<h2><%=h equipment_cat.name %></h2>
+				<ul>
+					<% @log_entry.equipment.find(:all, :conditions => { :equipment_category_id => equipment_cat.id}).each do |equipment| %>
+					<li>
+						<%= link_to h(equipment.name), pilots_equipment_path(equipment) %>
+					</li>
+					<% end %>
+				</ul>
+				<%- end -%>
+			</dd>
+			<%- end -%>
+			<%- if !(@log_entry.note.nil? || @log_entry.note.blank?) -%>
+			<dt>
+				Notes
+			</dt>
+			<dd>
+				<%= simple_format @log_entry.note %>
+			</dd>	
+			<%- end -%>
+		</dl>
+		
+	</fieldset>
+	
+	<div class="container buttonBar">
+		<%= link_to '<span>Edit Flight Log Entry</span>', edit_pilots_log_entry_path(@log_entry), :class => 'rounded' %>
+		<span class="or">or</span>
+		<%= link_to 'Show All Flights', pilots_log_entry_index_path, :class => "secondary" %>
+	</div>
+	
+</div>

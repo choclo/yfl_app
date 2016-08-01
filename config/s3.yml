@@ -1,0 +1,23 @@
+development:
+  access_key_id: 17G2NN7MWTE9GGYT8D02
+  secret_access_key: qlrcHwrzwmnlRDTcs1bsb6mNVw3zQ8PQZls2fBPu
+  bucket: cdn.dev.yourflightlog.com
+  upload_bucket: uploads.dev.yourflightlog.com
+
+test:
+  access_key_id: 123
+  secret_access_key: 123
+  bucket: cdn.test.yourflightlog.com
+  upload_bucket: uploads.test.yourflightlog.com
+
+staging:
+  access_key_id: 17G2NN7MWTE9GGYT8D02
+  secret_access_key: qlrcHwrzwmnlRDTcs1bsb6mNVw3zQ8PQZls2fBPu
+  bucket: cdn.stage.yourflightlog.com
+  upload_bucket: uploads.stage.yourflightlog.com
+
+production:
+  access_key_id: AKIAIUUAMAA5ZK3CKECA
+  secret_access_key: slmx/QFJy91P70lBYOefMHeE7UGOj8lGelZxKX9o
+  bucket: cdn.app.yourflightlog.com
+  upload_bucket: uploads.app.yourflightlog.com

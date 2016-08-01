@@ -1,0 +1,64 @@
+<%- content_for :head do -%>
+<%- end -%>
+<fieldset class="container">
+	<legend class="noscreen">Pilot information</legend>
+	
+	<dl class="leftLabels fields">
+		<dt class="first">
+			<%= f.label :name, 'Full Name' %>
+		</dt>
+		<dd class="first">
+			<!-- <div class="medium textfield"> -->
+				<%= f.text_field :name, :class => 'medium textfield' %>
+			<!-- </div> -->
+			<%= f.error_message_on :name, "Your full name " %>
+		</dd>
+		<dt>
+			<%= f.label :country, 'Country' %>	
+		</dt>
+		<dd>
+			<!-- <div class="medium select"> -->
+				<%= f.country_select :country, nil, :include_blank => true, :class => 'medium select' %>
+			<!-- </div> -->
+			<em class="tip">The country of your National Association membership (BHPA, NZHGPA) or the country you fly in the most.</em>
+			<%= f.error_message_on :country, "Home Country " %>
+		</dd>
+		<dt>
+			<%= f.label :membership_id, 'Membership ID' %>
+		</dt>
+		<dd>
+			<!-- <div class="small textfield"> -->
+				<%= f.text_field :membership_id, :class => 'small textfield' %>
+			<!-- </div> -->
+			<em class="tip">The ID assigned to you by your National Association.</em>
+			<%= f.error_message_on :name, "Membership ID " %>
+		</dd>
+		<% fields_for @pilot.starting_log_entry do |s| %>
+		<dt>
+			<%= s.label :air_time, 'Starting Air-Time' %>
+		</dt>
+		<dd>
+			<div id="startingAirTimeRow">
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= s.text_field :air_time, 
+										:size => 4, 
+										:value => pretty_decimal(@pilot.starting_log_entry.air_time_unit == "hours" ? @pilot.starting_log_entry.air_time / 60.00 : @pilot.starting_log_entry.air_time, 2),
+										:class => 'tiny numeric textfield'
+					%>
+				<!-- </span> -->
+				<!-- <span class="select"> -->
+					<%= s.select :air_time_unit, [ "minutes","hours" ], :class => 'select' %>
+				<!-- </span> -->
+				<span class="fieldText">total air-time over a total of </span>
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= s.text_field :number_of_flights, :size => 4, :class => 'tiny numeric textfield' %>
+				<!-- </span> -->
+				<span class="left fieldText">flights</span>
+			</div>
+			<em class="tip">This will be the base starting value for your flight log's air-time records.</em>
+			<%= s.error_message_on 'starting_air_time', "Your starting air&ndash;time " %>
+	    <% end %>
+		</dd>
+	</dl>
+	
+</fieldset>

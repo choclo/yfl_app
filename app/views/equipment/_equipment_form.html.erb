@@ -1,0 +1,100 @@
+<%- content_for :head do -%>
+<%- end -%>
+<fieldset class="container">
+	<legend class="noscreen">Equipment details</legend>
+
+	<dl class="leftLabels fields">
+		<dt class="first">
+			<%= f.label :equipment_category_id, "Category" %>
+		</dt>
+		<dd class="first">
+			<!-- <div class="medium select"> -->
+				<%= select_tag "equipment[equipment_category_id]", 
+						options_for_equipment_categories(:selected => @equipment.equipment_category_id || params[:equipment_category_id].to_i),
+						:class => 'medium select'
+				%>
+			<!-- </div> -->
+		</dd>
+		<dt>
+			<%= f.label :name, "Name" %>
+		</dt>
+		<dd>
+			<!-- <div class="medium textfield"> -->
+				<%= f.text_field :name, :class => 'medium textfield' %>
+			<!-- </div> -->
+			<em class="tip">For example, the manufacturer and model name.</em>
+			<%= f.error_message_on :name, "Name " %>
+		</dd>
+		<dt>
+			<%= f.label :starting_air_time, "Previous air&ndash;time" %>
+		</dt>
+		<dd>
+			<div id="startingAirTimeRow">
+				<!-- <span class="tiny numeric textfield"> -->
+					<%= f.text_field :starting_air_time, 
+										:size => 4, 
+										:value => @equipment.starting_air_time.nil? ? 0 : 
+													pretty_decimal( (@equipment.starting_air_time_unit == "hours" ? (@equipment.starting_air_time / 60.00) : @equipment.starting_air_time), 2),
+										:class => 'tiny numeric textfield'
+					%>
+				</span>
+				<!-- <span class="select"> -->
+					<%= f.select :starting_air_time_unit, 
+									[ "minutes","hours" ],
+									:id => nil,
+									:class => 'select'
+					%>
+				<!-- </span> -->
+			</div>
+			<em class="tip">How much use had this <%=h @equipment.equipment_category ? @equipment.equipment_category.name : "equipment" %> had? We'll use this value as a starting point, and add any future usage with this value.</em>
+			<%= f.error_message_on :starting_air_time, "Starting air time" %>
+		</dd>
+		<dt>
+			<%= f.label :serial_number, "Serial number" %>
+		</dt>
+		<dd>
+			<!-- <div class="small textfield"> -->
+				<%= f.text_field :serial_number, :class => 'small textfield' %>
+			<!-- </div> -->
+			<em class="tip">Just in case&hellip; these things do get stolen or lost from time to time.</em>
+			<%= f.error_message_on :serial_number, "Serial number " %>
+		</dd>
+		<dt>
+			<%= f.label :colour, "Colour/Appearance" %>
+		</dt>
+		<dd>
+			<!-- <div class="medium textfield"> -->
+				<%= f.text_field :colour, :class => 'medium textfield' %>
+			<!-- </div> -->
+			<em class="tip">If applicable, describe the appearance of this equipment.</em>
+			<%= f.error_message_on :colour, "Colour/Appearence" %>
+		</dd>
+		<dt>
+			<%= f.label :notes, "Notes" %>
+		</dt>
+		<dd>
+			<fieldset class="collapsible jsHide" id="note">
+				<legend class="noscreen">Notes for equipment</legend>
+				<!-- <div> -->
+					<!-- <div class="full textarea"> -->
+						<%= f.text_area :notes, :rows => 4, :cols => 100, :class => 'full textarea' %>
+					<!-- </div> -->
+					<em class="tip">Any notes you may have on the equipments condition, function, etc.</em>
+				<!-- </div> -->
+			</fieldset>
+		</dd>
+		<dt>
+			<%= f.label :purchase_date, "Date purchased" %>
+		</dt>
+		<dd>
+			<div>
+				<!-- <span class="select"> -->
+					<%= f.date_select :purchase_date, :order => [:day, :month, :year], :include_blank => true, :default => nil, :start_year => Date.today.year - 15, :end_year => Date.today.year, :class => 'select' %>
+				<!-- </span> -->
+				<em class="tip">When did you buy this bad-boy?</em>
+			</div>
+			<%= f.error_message_on :purchase_date, "Purchase date" %>
+		</dd>
+	</dl>
+	
+</fieldset>

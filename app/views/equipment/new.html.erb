@@ -1,0 +1,33 @@
+<%- title("Add equipment") -%>
+<%- current_navigation_tab :equipment, :new -%>
+<div class="box">
+	<div class="pageTitle">
+		<%# if @equipment.equipment_category %>
+		<%# title("Add #{@equipment.equipment_category.name}", "h1") %>
+		<%# else -%>
+		<h1>
+			<%= link_to "Equipment", pilots_equipment_index_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			Add an item of Equipment&hellip;
+		</h1>
+		<%# end -%>
+	</div>
+	
+	<%- form_for @equipment, :url => { :action => :create }, :html => { :multipart => true } do |f| -%>
+	
+	<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving those changes:" %>
+	
+	<%= render :partial => "equipment_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit">
+			<b><b>
+				Save Equipment<%#h @equipment.equipment_category ? @equipment.equipment_category.name : "Equipment" %>
+			</b></b>
+		</button>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_equipment_index_path, :title => "Don't save this equipment", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>

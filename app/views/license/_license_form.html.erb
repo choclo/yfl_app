@@ -1,0 +1,78 @@
+<fieldset class="container">
+	<legend class="noscreen">License</legend>
+	<%= f.hidden_field :aircraft_type_id %>
+	<dl class="leftLabels fields">
+		<dt>
+			<%= f.label :country, "Country", :class => 'required' %>
+		</dt>
+		<dd>
+			<!--<div class="required small select">-->
+				<%= f.country_select :country, [@country], {:include_blank => true}, {:class => 'required small select'} %>
+			<!--</div>-->
+			<em class="inline tip">The country of the issuing licensing body.</em>
+		</dd>
+		<dt>
+			<%= f.label :name, "Name", :class => 'required' %>
+		</dt>
+		<dd>
+			<!-- <div class="required small textfield"> -->
+				<%= f.text_field :name, :class => 'required small textfield' %>
+			<!-- </div> -->
+		</dd>
+		<dt>
+			<%= f.label :identifier, "Short identifier", :class => 'optional' %>
+		</dt>
+		<dd>
+			<!-- <div class="optional tiny textfield"> -->
+				<%= f.text_field :identifier, :class => 'optional tiny textfield' %>
+			<!-- </div> -->
+			<em class="inline tip">Optional: e.g. "Club Pilot" could be known as "CP".</em>
+		</dd>
+		<dt>
+			<%= f.label :suggested, "Share it", :class => 'optional' %>
+		</dt>
+		<dd style="margin-top: 1.5em">
+			<label for="license_suggested" class="optional checkbox field">
+				<!-- <span class="optional checkbox"> -->
+					<%= f.check_box	 :suggested, :class => 'optional checkbox' %>
+				<!-- </span> -->
+				Suggest this license as a default for all pilots of the selected country
+			</label>
+		</dd>
+		<%- if !@licenses.nil? && !@licenses.empty? %>
+		<dt>
+			<%= f.label :display_order, "Display order", :class => 'required' %>
+		</dt>
+		<dd>
+			<p class="tip">Select where this license rank in the list of licenses:</p>
+			
+			<ol id="licenseDisplayOrderList">
+				<li>
+					<label class="radiobutton">
+						<%= radio_button_tag('license[display_order]', 0, @license.display_order == 0)  %>Start of list
+					</label>
+				</li>
+			
+			<% @licenses.each_with_index do |license, i| %>
+				<% if i != 0 %>
+				<li>
+					<label class="radiobutton">
+						<%= radio_button_tag('license[display_order]', license.display_order - 1)  %>Insert here
+					</label>
+				</li>
+				<% end %>
+				<li class="existingLicense">
+						<%=h license.name %>
+				</li>
+			<%- end -%>
+			
+				<li>
+					<label class="radiobutton">
+						<%= radio_button_tag('license[display_order]', @licenses.last.display_order + 2)  %>End of list
+					</label>
+				</li>
+			</ol>
+		</dd>
+		<%- end -%>
+	</dl>
+</fieldset>

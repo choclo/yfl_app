@@ -1,0 +1,45 @@
+<%- content_for :head do -%>
+<%- end -%>
+<fieldset class="container">
+	<legend class="noscreen">Preferences</legend>
+	
+	<dl class="leftLabels fields">
+		<dt class="first">
+			Display units for&hellip;
+		</dt>
+		<dd class="first">
+			<%= f.label :speed_unit, "Speed in", :class => "fieldText" %>
+			<!-- <span class="select"> -->
+				<%= f.select :speed_unit, @speed_units, :class => 'select' %>
+			<!-- </span> -->
+		</dd>
+		<dd>
+			<%= f.label :distance_unit, "Distance in", :class => "fieldText" %>
+			<!-- <span class="select"> -->
+				<%= f.select :distance_unit, @distance_units, :class => 'select' %>
+			<!-- </span> -->
+		</dd>
+		<dd>
+			<%= f.label :height_unit, "Height/Altitude in", :class => "fieldText" %>
+			<!-- <span class="select"> -->
+				<%= f.select :height_unit, @height_units, :class => 'select' %>
+			<!-- </span> -->
+		</dd>
+		<dt class="ruled">
+			Date &amp; Time
+		</dt>
+		<dd class="ruled">
+			<%= f.label :time_zone, "Record times in the time&ndash;zone", :class => "fieldText" %>
+			<!-- <span class="select"> -->
+				<%= f.time_zone_select :time_zone, nil, :default => "UTC", :class => 'select' %>
+			<!-- </span> -->
+		</dd>
+		<dd>
+			<%= f.label :date_format, "Displays dates as", :class => "fieldText" %>
+			<!-- <span class="select"> -->
+				<%= f.select :date_format, @date_formats, :class => 'select' %>
+			<!-- </span> -->
+		</dd>
+	</dl>
+	
+</fieldset>

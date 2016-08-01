@@ -1,0 +1,102 @@
+<%- title(h"#{truncate(@equipment.name,30)}, #{truncate(@equipment.equipment_category.name,30)} | Equipment") -%>
+<%- current_navigation_tab :equipment, nil -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Equipment", pilots_equipment_index_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			<%=h truncate(@equipment.name, 40) %>
+		</h1>
+		<h2><%=h @equipment.equipment_category.name %></h2>
+	</div>
+
+	<%- if @equipment.deleted? -%>
+	<div class="deleted">
+		<h3>You've deleted this!</h3>
+		<p>You have previously deleted this piece of equipment, but you can undelete it if you like by clicking the <strong>Undelete</strong> button at the bottom of this page.</p>
+	</div>
+	<%- end -%>
+	
+	<%= flash_messages %>
+	
+	<fieldset class="container">
+		<legend class="noscreen">Equipment details</legend>
+
+		<dl class="leftLabels fieldValues">
+			<dt class="first">
+				Name
+			</dt>
+			<dd class="first">
+				<%= h @equipment.name %>
+			</dd>
+			<dt>
+				Air-time
+			</dt>
+			<dd>
+				<%- if @equipment.starting_air_time.nil? -%>
+				<span class="blank">&mdash;</span>
+				<%- else -%>
+				<%= pretty_decimal( @equipment.starting_air_time_unit == "hours" ? (@equipment.starting_air_time / 60.0): @equipment.starting_air_time) %> <%= @equipment.starting_air_time_unit %>
+				<%- end -%>
+			</dd>
+			<dt>
+				Serial number
+			</dt>
+			<dd>
+				<%- if @equipment.serial_number.nil? || @equipment.serial_number.blank?-%>
+				<span class="blank">&mdash;</span>
+				<%- else -%>
+				<%= h @equipment.serial_number %>
+				<%- end -%>
+			</dd>
+			<%- if !@equipment.colour.nil? -%>
+			<dt>
+				Colour / Appearance
+			</dt>
+			<dd>
+				<%= h @equipment.colour %>
+			</dd>
+			<%- end -%>
+			<%- if !(@equipment.notes.nil? || @equipment.notes.blank?) -%>
+			<dt>
+				Notes
+			</dt>
+			<dd>
+				<%= simple_format @equipment.notes %>
+			</dd>
+			<%- end -%>
+			<%- if !@equipment.purchase_date.nil? -%>
+			<dt>
+				Date purchased
+			</dt>
+			<dd>
+				<%= @equipment.purchase_date.strftime current_user.pilot.preferences.date_format %>
+				<em>
+					&ndash; <%= distance_of_time_in_words @equipment.purchase_date, Time.now %> 
+					<%= @equipment.purchase_date < Date.today ? "ago" : "into the future (you've been watching too much Back to the Future, McFly!)" %>
+				</em>
+			</dd>
+			<%- end -%>
+			<%- if !@equipment.photo_assets.empty? -%>
+			<dt>
+				Photos
+			</dt>
+			<dd style="overflow:visible">
+			<%= render :partial => "shared_partials/photo_carousel", :locals => { :photo_assets => @equipment.photo_assets } %>
+			</dd>
+			<%- end -%>
+		</dl>
+		
+	</fieldset>
+	
+	<div class="container buttonBar">
+		<%- if @equipment.deleted? -%>
+		<%= button_to "Undelete #{h @equipment.equipment_category.name}",{ :action => :restore }, { :class => "rounded" } %>
+		<%- else -%>
+		<%= link_to "<span>Edit Equipment</span>", edit_pilots_equipment_path, :class => 'rounded' %>
+		<%- end -%>
+		<span class="or">or</span>
+		<%= link_to 'Show All Equipment', pilots_equipment_index_path, :class => "secondary" %>
+	</div>
+	
+</div>

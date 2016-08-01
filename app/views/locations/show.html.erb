@@ -1,0 +1,90 @@
+<%- current_navigation_tab :locations, nil -%>
+<%- title("#{truncate(@location.name, :length => 30)} | Locations") -%>
+<%- content_for :head do -%>
+<%= stylesheet_link_tag "location" %>
+<%- end -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>
+			<%= link_to "Locations", pilots_locations_path, :class => "crumb" %>
+			<span class="delimeter"><img src="/images/crumb-delimiter.png" alt="" /></span>
+			<%=h @location.name %>
+		</h1>
+	</div>
+	
+	<%= flash_messages %>
+	
+	<%- if @map -%>
+	<div class="drawer container" id="locationMap">
+		<%= @map.div(:width => "100%", :height => @map_height) %>
+	</div>
+	<%- end -%>
+	
+	<fieldset class="container">
+		<legend class="noscreen">Location</legend>
+		
+		<dl class="leftLabels fieldValues">
+			<dt class="first">
+				Name
+			</dt>
+			<dd class="first">
+				<%=h @location.name %>
+			</dd>
+			<dt>
+				Description
+			</dt>
+			<dd>
+			<%- if @location.description.nil? -%>
+				<span class="blank">&mdash;</span>
+			<%- else -%>
+				<%= simple_format @location.description %>
+			<%- end -%>
+			</dd>
+			<dt>
+				Altitude
+			</dt>
+			<dd>
+			<%- if @location.altitude_masl.nil? -%>
+				<span class="blank">&mdash;</span>
+			<%- else -%>
+				<%= pretty_decimal in_user_height_units @location.altitude_masl %> <%= height_unit %>
+				<em class="tip">(Above sea level)</em>
+			<%- end -%>
+			</dd>
+			<dt>
+				Where about?
+			</dt>
+			<dd>
+			<%- if not @location.address1.nil? -%>
+				<%=h @location.address1 %>,<br />
+			<%- end -%>
+			<%- if not @location.address2.nil? -%>
+				<%=h @location.address2 %>
+			<%- end -%>
+			<%- if not @location.address3.nil? -%>
+				<%=h @location.address3 %>
+			<%- end -%>
+				<%=h @location.country %>
+			</dd>
+			<dt>
+				Coordinates
+			</dt>
+			<dd>
+			<%- if @location.lat.nil? || @location.lng.nil? -%>
+				<span class="blank">&mdash; No GPS coordinates were given for this location</span>
+			<%- else -%>
+				<%= @location.lat %>, <%= @location.lng %>
+				<em class="tip">(latitude, longitude)</em>
+			<%- end -%>
+			</dd>
+		</dl>
+		
+	</fieldset>
+	
+	<div class="container buttonBar">
+		<%= link_to '<span>Edit Location</span>', edit_pilots_location_path(@location), :class => 'rounded' %>
+		<span class="or">or</span>
+		<%= link_to 'Show All Locations', pilots_locations_path, :class => "secondary" %>
+	</div>
+	
+</div>

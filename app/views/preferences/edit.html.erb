@@ -1,0 +1,28 @@
+<%- current_navigation_tab :settings, :preferences -%>
+<%- title("Display Preferences | Settings") -%>
+<div class="box">
+	<div class="pageTitle">
+		<h1>Display Preferences</h1>
+		<h2>Customise YourFlightLog</h2>
+	</div>
+	
+	<%- form_for current_pilot.preferences, :url => { :action => :update } do |f| -%>
+	
+	<%= f.error_messages :header_tag => "h2", :header_message => "Please Try Again!", :message => "We had some problems saving your preferences:" %>
+	
+	<%= flash_messages %>
+	
+	<%= render :partial => "preferences_form", :locals => { :f => f } %>
+	
+	<div class="container buttonBar">
+		<button class="rounded" type="submit">
+			<b><b>
+				Save Preferences
+			</b></b>
+		</button>
+		<span class="or">or</span>
+		<%= link_to 'Cancel', pilots_log_entry_index_path, :title => "Don't save any changes, just return to the flight log", :class => "secondary" %>
+	</div>
+	
+	<%- end -%>
+</div>
