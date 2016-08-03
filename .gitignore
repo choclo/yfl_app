@@ -1,1 +1,4 @@
 .app.env
+files/app.yourflightlog.com.crt
+files/app.yourflightlog.com.key
+files/ca.pem
