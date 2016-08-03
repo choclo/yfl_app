@@ -1,12 +1,11 @@
 FROM centos:6.8
 MAINTAINER tolivares@gmail.com
-ARG GIT_SECRET=local
-
+ARG GIT_TOKEN=local
 # Set Pasenger Version
 ENV PASSENGER_VERSION="4.0.23" \
     PATH="/opt/passenger/bin:$PATH" \
     RAILS_ROOT="/home/yfl_app" \
-    GIT_SECRET=${GIT_SECRET}
+    GIT_TOKEN=${GIT_TOKEN}
 
 # Update repo & release as well as install needed packages
 RUN yum install -y epel-release \
@@ -28,9 +27,9 @@ RUN yum install -y epel-release \
 && mkdir -p /opt \
 && curl -L https://s3.amazonaws.com/phusion-passenger/releases/passenger-$PASSENGER_VERSION.tar.gz | tar -xzf - -C /opt \
 && mv /opt/passenger-$PASSENGER_VERSION /opt/passenger \
-&& /opt/passenger/bin/passenger-install-apache2-module --auto \
+&& /opt/passenger/bin/passenger-install-apache2-module --auto
 # Clone git repo
-&& git clone -b yfl_app https://${GIT_SECRET}:x-oauth-basic@github.com/choclo/yfl_app.git $RAILS_ROOT
+RUN git clone https://${GIT_TOKEN}:x-oauth-basic@github.com/choclo/yfl_app.git $RAILS_ROOT
 # Copy needed files such as ssl certs and apache conf
 COPY files/app.yourflightlog.com.key /etc/pki/tls/private/
 COPY files/app.yourflightlog.com.crt /etc/pki/tls/certs/

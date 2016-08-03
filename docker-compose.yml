@@ -1,9 +1,10 @@
-version: 2.0
+version: '2'
 services:
   web:
-    build: .
-    ports:
-      - "80:80", "443,443"
+    build:
+      context: .
+      args:
+       GIT_TOKEN: 3b9118a0a5b695c2ad9e914964e9180a37461634  
     depends_on:
       - db
   db:
