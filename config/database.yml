@@ -1,8 +1,8 @@
 production:
   adapter: mysql
-  host: localhost
+  host: ENV['YFL_DBHOST']
   encoding: utf8
-  database: production_yourflightlog
-  username: yfl_db
-  password: paraglid3rpil0t
+  database: ENV['YFL_DB']
+  username: ENV['YFL_USER']
+  password: ENV['YFL_PASS']
   port: 3306
