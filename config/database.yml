@@ -1,8 +1,8 @@
 production:
   adapter: mysql
-  host: ENV['YFL_DBHOST']
+  host: $YFL_DBHOST
   encoding: utf8
-  database: ENV['YFL_DB']
-  username: ENV['YFL_USER']
-  password: ENV['YFL_PASS']
+  database: $YFL_DB
+  username: $YFL_USER
+  password: $YFL_PASS
   port: 3306

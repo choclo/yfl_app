@@ -108,7 +108,7 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :session_key => '_yourflightlog_session',
-    :secret      => ENV['SECRET_TOKEN']
+    :secret      => '$SECRET_TOKEN'
   }
 
   #config.action_controller.relative_url_root = ''
