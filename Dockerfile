@@ -27,9 +27,9 @@ RUN yum install -y epel-release \
 && mkdir -p /opt \
 && curl -L https://s3.amazonaws.com/phusion-passenger/releases/passenger-$PASSENGER_VERSION.tar.gz | tar -xzf - -C /opt \
 && mv /opt/passenger-$PASSENGER_VERSION /opt/passenger \
-&& /opt/passenger/bin/passenger-install-apache2-module --auto
+&& /opt/passenger/bin/passenger-install-apache2-module --auto \
 # Clone git repo
-RUN git clone https://${GIT_TOKEN}:x-oauth-basic@github.com/choclo/yfl_app.git $RAILS_ROOT
+&& git clone https://${GIT_TOKEN}:x-oauth-basic@github.com/choclo/yfl_app.git $RAILS_ROOT
 # Copy needed files such as ssl certs and apache conf
 COPY files/app.yourflightlog.com.key /etc/pki/tls/private/
 COPY files/app.yourflightlog.com.crt /etc/pki/tls/certs/

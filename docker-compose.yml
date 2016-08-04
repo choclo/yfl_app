@@ -1,5 +1,12 @@
 version: '2'
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
   web:
     build:
       context: .
@@ -9,13 +16,19 @@ services:
       - db
     env_file:
       - .app.env
+    environment:
+      - VIRTUAL_HOST=app.yourflightlog.com
     links:
     - db:mysql
+    hostname: web
+    domainname: yourflightlog.com
   db:
     image: mariadb
+    container_name: mysql_dbs
     environment:
-      - MYSQL_DATABASE: db_name
-      - MYSQL_USER: db_user
-      - MYSQL_PASSWORD: db_pass
+      - MYSQL_DATABASE=YfL_DataBase
+      - MYSQL_USER=YfL_User
+      - MYSQL_PASSWORD=P4r4gl1d3rp1l0t!
+      - MYSQL_ROOT_PASSWORD=tomas2003
     volumes:
       - /databases/yfldb:/var/lib/mysql
