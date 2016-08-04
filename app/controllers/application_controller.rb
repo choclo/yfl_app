@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   include RoleRequirementSystem 
-  include SslRequirement
+#  include SslRequirement
     
   helper :all # include all helpers, all the time
   protect_from_forgery
