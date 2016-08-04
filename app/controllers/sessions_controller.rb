@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  ssl_required :new, :create, :open_id_authentication if Rails.env == 'production'
+#  ssl_required :new, :create, :open_id_authentication if Rails.env == 'production'
 
   skip_before_filter :verify_authenticity_token, :only => :create
   skip_before_filter :redirect_if_not_setup
