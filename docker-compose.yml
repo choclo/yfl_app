@@ -5,13 +5,12 @@ services:
     container_name: nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   web:
-    build:
-      context: .
-      args:
-       GIT_TOKEN: 3b9118a0a5b695c2ad9e914964e9180a37461634  
+    image: yflapp_web:1.5
+    container_name: yflapp
     depends_on:
       - db
     env_file:

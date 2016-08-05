@@ -5,12 +5,13 @@ ARG GIT_TOKEN=local
 ENV PASSENGER_VERSION="4.0.23" \
     PATH="/opt/passenger/bin:$PATH" \
     RAILS_ROOT="/home/yfl_app" \
+    CLOUDFLARE="/opt/cloudflare" \
     GIT_TOKEN=${GIT_TOKEN}
 
 # Update repo & release as well as install needed packages
 RUN yum install -y epel-release \
 && yum update -y \
-&& yum -y install git rubygems ruby-devel gcc httpd httpd-devel gcc-c++ curl-devel openssl-devel zlib-devel mod_ssl mysql mysql-devel \
+&& yum -y install git rubygems ruby-devel gcc httpd httpd-devel gcc-c++ curl-devel openssl-devel zlib-devel mod_ssl mysql mysql-devel libtool \
 # Install needed gems for the application
 && gem update --system --no-ri --no-rdoc \
 && gem update --system 1.4.2 --no-ri --no-rdoc \
@@ -29,7 +30,9 @@ RUN yum install -y epel-release \
 && mv /opt/passenger-$PASSENGER_VERSION /opt/passenger \
 && /opt/passenger/bin/passenger-install-apache2-module --auto \
 # Clone git repo
-&& git clone https://${GIT_TOKEN}:x-oauth-basic@github.com/choclo/yfl_app.git $RAILS_ROOT
+&& git clone https://${GIT_TOKEN}:x-oauth-basic@github.com/choclo/yfl_app.git $RAILS_ROOT \
+# Install Cloudflare Apache module for real IP
+&& git clone https://github.com/cloudflare/mod_cloudflare.git $COUDFLARE && apxs -a -i -c $COUDFLARE/mod_cloudflare/mod_cloudflare.c
 # Copy needed files such as ssl certs and apache conf
 COPY files/app.yourflightlog.com.key /etc/pki/tls/private/
 COPY files/app.yourflightlog.com.crt /etc/pki/tls/certs/
